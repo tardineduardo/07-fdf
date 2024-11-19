@@ -1,4 +1,4 @@
-#include <mlx.h>
+#include "fdf.h"
 
 int	main(void)
 {
@@ -8,6 +8,7 @@ int	main(void)
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
 	mlx_loop(mlx);
+
 
 
 
