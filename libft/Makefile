@@ -22,7 +22,7 @@ CONV =	conv/ft_atoi.c \
 DEBUG =	debug/ft_debug_print_array_of_strings.c \
 		debug/ft_debug_print_array_of_ints.c \
 		debug/ft_debug_print_list.c \
-		debug/ft_debug_print_dclist.c \
+		# debug/ft_debug_print_dclist.c \
 
 ERROR =	error/ft_error_exit.c \
 		error/ft_perror_exit.c \
@@ -45,29 +45,6 @@ LISTS =	lists/slist/ft_lstadd_back.c \
 		lists/slist/ft_lstmap.c \
 		lists/slist/ft_lstnew.c \
 		lists/slist/ft_lstsize.c \
-		lists/clist/ft_clistsize.c \
-		lists/clist/ft_clstadd_back.c \
-		lists/clist/ft_clstadd_front.c \
-		lists/clist/ft_clstadd_mid.c \
-		lists/clist/ft_clstnew.c \
-		lists/dclst/ft_dclistsize.c \
-		lists/dclst/ft_dclstadd_back.c \
-		lists/dclst/ft_dclstadd_front.c \
-		lists/dclst/ft_dclstnew.c \
-		lists/dclst/ft_dclsttrav_to_index.c \
-		lists/dclst/ft_dclst_find_value.c \
-		lists/dclst/ft_dclst_find_lowest_int.c \
-		lists/dclst/ft_dclst_find_lowest_abs.c \
-		lists/dclst/ft_dclst_find_highest_int.c \
-		lists/dclst/ft_dclst_circle_sorted.c \
-		lists/dclst/ft_dclst_list_sorted.c \
-		lists/dclst/ft_dclst_dist_head_bidi_len.c \
-		lists/dclst/ft_dclst_dist_head_bidi.c \
-		lists/dclst/ft_dclst_dist_head_unid_len.c \
-		lists/dclst/ft_dclst_dist_head_unid.c \
-		lists/dclst/ft_dclst_clock_sortd.c \
-		lists/dclst/ft_dclst_find_node.c \
-		lists/dclst/ft_dclstclear_simple.c \
 
 MEM = 	mem/ft_bzero.c \
 		mem/ft_calloc.c \
