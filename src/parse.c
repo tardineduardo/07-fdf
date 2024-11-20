@@ -3,14 +3,16 @@
 void	ft_get_size(int fd, int *width, int *height)
 {
 	char	*line;
+	char	*trav;
 
 	line = get_next_line(fd);
-	*width = 1;
-	while(line)
+	trav = line;
+	*width = 0;
+	while(*trav != '\n')
 	{
-		if (*line == ' ')
+		if (*trav == ' ')
 			(*width)++;
-		line++;
+		trav++;
 	}
 	free(line);
 	*height = 1;
@@ -33,9 +35,9 @@ map **ft_parse(char *filename)
 	int		height;
 	map		**parsed;
 
-	fd = open("_test_maps/42.fdf", O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	ft_get_size(fd, &width, &height);
-	parsed = malloc(1);
+	parsed = ft_calloc(sizeof(map));
 	close(fd);
 	return (parsed);
 

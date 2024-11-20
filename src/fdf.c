@@ -7,14 +7,14 @@
 
 #define MLX_ERROR 1
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	map		**parsed;
 
-	// if (argc == 1)
-	// 	return (1);
+	if (argc == 1)
+		return (1);
 
 	mlx_ptr = mlx_init();
 	if (mlx_ptr == NULL)
@@ -26,7 +26,7 @@ int main(void)
 		return (MLX_ERROR);
 	}
 
-	parsed = ft_parse("_test_maps/42.fdf");
+	parsed = ft_parse(argv[1]);
 
 
 	while (1)
