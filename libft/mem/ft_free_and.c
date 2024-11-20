@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_free_and.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:42:06 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/18 15:35:42 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:54:07 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,12 @@ void *ft_free_and_null(void *ptr)
 {
 	free(ptr);
 	return (NULL);
+}
+
+void *ft_free_and_exit(void *ptr, char *msg, int errnum)
+{
+	free(ptr);
+	ft_dprintf(STDERR_FILENO, msg);
+	exit(errnum);
 }
 

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug_print_array_of_strings.c                                  :+:      :+:    :+:   */
+/*   ft_count_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/12 18:49:43 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/26 13:50:38 by eduribei         ###   ########.fr       */
+/*   Created: 2024/11/20 13:00:43 by eduribei          #+#    #+#             */
+/*   Updated: 2024/11/20 13:06:41 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_debug_print_array_of_strings(char **array, int fd)
+size_t	ft_count_char(char *s, char c)
 {
-	int	a;
+	size_t	count;
+	int		i;
 
-	a = 0;
-	while (array[a] != NULL)
+	count = 0;
+	i = 0;
+	while(s[i] != '\0')
 	{
-		ft_dprintf(fd, "[%i] \t%s\n", a, array[a]);
-		a++;
+		if (s[i] == c)
+			count++;
+		i++;
 	}
-	ft_dprintf(fd, "\n");
+	return (count);
 }

@@ -1,4 +1,4 @@
-//PRINT;F =	printf/ft_printf_dprintf.c \
+PRINT =	printf/ft_printf_dprintf.c \
 			printf/ft_printf_int_chr_str.c \
 			printf/ft_printf_hex_ptr_uns.c \
 
@@ -61,6 +61,7 @@ STRING = string/ft_concatenate.c \
 		string/ft_concatenate_var.c \
 		string/ft_split_char.c \
 		string/ft_split_space.c \
+		string/ft_split_count.c \
 		string/ft_strchr.c \
 		string/ft_strdup.c \
 		string/ft_striteri.c \
@@ -75,6 +76,7 @@ STRING = string/ft_concatenate.c \
 		string/ft_strrchr.c \
 		string/ft_strtrim.c \
 		string/ft_substr.c \
+		string/ft_count_char.c \
 
 VALID =	valid/ft_isalnum.c \
 		valid/ft_isalpha.c \
@@ -87,7 +89,7 @@ SORT =	sort/ft_sort_int_array_bubble.c
 
 GNL	=	gnl/get_next_line_bonus.c
 
-OBJS =	$(//PRINT;F:.c=.o) $(CONV:.c=.o) $(DEBUG:.c=.o) $(ERROR:.c=.o) \
+OBJS =	$(PRINT:.c=.o) $(CONV:.c=.o) $(DEBUG:.c=.o) $(ERROR:.c=.o) \
 		$(FDS:.c=.o) $(LISTS:.c=.o) $(MEM:.c=.o) \
 		$(PUTS:.c=.o) $(STRING:.c=.o) $(VALID:.c=.o) \
 		$(GNL:.c=.o) $(SORT:.c=.o) \

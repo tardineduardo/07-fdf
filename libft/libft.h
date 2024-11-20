@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
-/*   Updated: 2024/11/19 18:53:20 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:54:41 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_free(int total, ...);
 bool	ft_free_and_false(void *ptr);
 bool	ft_free_and_true(void *ptr);
 void	*ft_free_and_null(void *ptr);
+void	*ft_free_and_exit(void *ptr, char *msg, int errnum);
 
 // validations
 int		ft_isalnum(int c);
@@ -109,6 +110,7 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_split_count(char const *s, char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
@@ -121,6 +123,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_concatenate_var(int num, ...);
 char	*ft_concatenate(char *s1, char *s2, char *s3);
+size_t	ft_count_char(char *s, char c);
+
 
 // printing
 int		ft_putchar_fd(char c, int fd);

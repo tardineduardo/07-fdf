@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug_print_array_of_strings.c                                  :+:      :+:    :+:   */
+/*   ft_split_count.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/12 18:49:43 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/26 13:50:38 by eduribei         ###   ########.fr       */
+/*   Created: 2024/05/20 15:16:06 by eduribei          #+#    #+#             */
+/*   Updated: 2024/11/20 12:40:29 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_debug_print_array_of_strings(char **array, int fd)
+size_t	ft_split_count(char const *s, char c)
 {
-	int	a;
+	size_t	count_substrs;
+	int		in_substr;
 
-	a = 0;
-	while (array[a] != NULL)
+	count_substrs = 0;
+	in_substr = 0;
+	while (*s != '\0')
 	{
-		ft_dprintf(fd, "[%i] \t%s\n", a, array[a]);
-		a++;
+		if (*s != c && !in_substr)
+		{
+			in_substr = 1;
+			count_substrs++;
+		}
+		else if (*s == c)
+			in_substr = 0;
+		s++;
 	}
-	ft_dprintf(fd, "\n");
+	return (count_substrs);
 }
