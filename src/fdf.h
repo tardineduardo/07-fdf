@@ -4,20 +4,20 @@
 
 #define FDF_BUFF 1024
 
-typedef struct t_map
+typedef struct
 {
 	int	value;
-	int	color;
+	char	*color;
 	int	red;
 	int	gre;
 	int	blu;
-}		t_map;
+} t_map;
 
-typedef struct t_file
+typedef struct
 {
-	size_t	h_file;
-	size_t	w_file;
-}		t_file;
+	size_t	line_count;
+	size_t	column_count;
+} t_file;
 
 
 t_map **ft_parse(char *filename);

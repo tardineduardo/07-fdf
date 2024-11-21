@@ -11,14 +11,7 @@ int main(int argc, char *argv[])
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-<<<<<<< HEAD
 	t_map	**parsed;
-=======
-	map		**parsed;
-
-	if (argc == 1)
-		return (1);
->>>>>>> d7d7169147ed6f45e8ec991a3834f6065110ef7d
 
 	if (argc != 2)
 		return (1);
@@ -32,12 +25,6 @@ int main(int argc, char *argv[])
 		return (MLX_ERROR);
 	}
 	parsed = ft_parse(argv[1]);
-
-
-<<<<<<< HEAD
-=======
-	parsed = ft_parse(argv[1]);
->>>>>>> d7d7169147ed6f45e8ec991a3834f6065110ef7d
 
 
 	mlx_destroy_window(mlx_ptr, win_ptr);
