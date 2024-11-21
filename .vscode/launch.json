@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/fdf",
-			"args": ["/home/eduardo/Documentos/repos/07-fdf/maps/t1.fdf"],
+			"args": ["/home/eduardo/Documentos/repos/07-fdf/maps/10-2.fdf"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
