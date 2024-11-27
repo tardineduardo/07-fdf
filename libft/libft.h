@@ -31,6 +31,10 @@
 #  define GNLBUFF 1
 # endif
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
 # ifndef MAXLISTLOOPS
 #  define MAXLISTLOOPS 1000000000
 # endif
@@ -58,24 +62,32 @@ typedef struct s_dlist
 
 }				t_dll;
 
+typedef long long llong;
+
 // conversions + comparisons
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
+llong	ft_atohx(char *s);
 char	*ft_itoa(int n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_abs(int a);
+
+//calc
 int		lowest(int a, int b);
 int		greatest(int a, int b);
 
 // debug
 void	ft_debug_print_array_of_strings(char **s, int fd);
 void	ft_debug_print_list(t_list **head, char *type, size_t offset);
-//void	ft_debug_print_dclist(t_dll **tail, char *type, size_t offset, int fd);
+void	ft_debug_print_dclist(t_dll **tail, char *type, size_t offset, int fd);
 void	ft_debug_print_arr_ints(int *a, int len, bool lnbk, bool idx, int fd);
 
 // errors
-void	ft_error_exit(char *message, int exit_number) __attribute__((noreturn));
+void	ft_print_error_and_exit(char *message, int exit_number) __attribute__((noreturn));
+bool	ft_print_error_and_false(char *message);
+bool	ft_print_error_and_true(char *message);
+void	*ft_print_error_and_null(char *message);
 void	ft_perror_extra(char *extra_argument, char *normal_perror);
 void	ft_perror_exit(char *message, int exit_number) __attribute__((noreturn));
 void	*ft_null_and_stderr(char *message); 
@@ -136,11 +148,18 @@ int		ft_puthex_low_int_fd(unsigned int n, int fd);
 int		ft_putuns_fd(unsigned int n, int fd);
 int		ft_puthex_lo_long_fd(unsigned long long int n, int fd);
 
-// file descriptors
+// files
 void	ft_close(int total, ...);
 void	ft_close_two(int fd1, int fd2);
 void	ft_close_three(int fd1, int fd2, int fd3);
 void	ft_close_four(int fd1, int fd2, int fd3, int fd4);
+int		ft_count_nonempty_lines_fp(char *file_path);
+int		ft_count_all_lines_fd(int fd);
+int		ft_count_all_lines_fp(char *file_path);
+int		ft_count_nonempty_lines_fd(int fd);
+int		ft_count_nonempty_lines_fp(char *file_path);
+char	*ft_parse_all_text_fn(char *filename);
+
 
 //lists - slist
 void	ft_lstclear_err_exit(t_list **lst, void (*del)(void*), char *e, int n);
@@ -163,26 +182,26 @@ void	ft_clstadd_back(t_list **tail, t_list *new);
 void	ft_clstadd_front(t_list **tail, t_list *new);
 void	ft_clstadd_mid_wrap(t_list **tail, t_list *new, size_t pos);
 
-// //lists - dclist
-// t_dll	*ft_dclstnew(void *content);
-// //size_t	ft_dclstsize(t_dll **tail);
-// int		ft_dclstsize_debug(t_dll **tail);
-// void	ft_dclstadd_back(t_dll **tail, t_dll *new);
-// void	ft_dclstadd_front(t_dll **tail, t_dll *new);
-// t_dll	*ft_dclsttrav_to_index(t_dll **tail, int index);
-// t_dll	*ft_dclst_find_value(t_dll **tail, int value, int offset);
-// t_dll	*ft_dclst_find_lowest_int(t_dll **tail, int offset);
-// t_dll	*ft_dclst_find_lowest_abs(t_dll **tail, int offset);
-// t_dll	*ft_dclst_find_highest_int(t_dll **tail, int offset);
-// bool	ft_dclst_clock_sortd(t_dll **tail, char mode, int offset);
-// bool	ft_dclst_circ_sortd(t_dll **tail, char type, char mode, int offset);
-// bool	ft_dclst_list_sortd(t_dll **tail, char *type, char mode, int offset);
-// int		ft_dclst_dist_head_bidi(t_dll **tail, t_dll *node);
-// int		ft_dclst_dist_head_bidi_len(t_dll **tail, t_dll *node, int list_len);
-// int		ft_dclst_dist_head_unid(t_dll **tail, t_dll *nd, char mode);
-// int		ft_dclst_dist_head_unid_len(t_dll **tail, t_dll *nd, int llen, char mode);
-// t_dll	*ft_dclst_find_node(t_dll **tail, t_dll *node);
-// void	ft_dclstclear_simple(t_dll **lst);
+//lists - dclist
+t_dll	*ft_dclstnew(void *content);
+int		ft_dclstsize(t_dll **tail);
+int		ft_dclstsize_debug(t_dll **tail);
+void	ft_dclstadd_back(t_dll **tail, t_dll *new);
+void	ft_dclstadd_front(t_dll **tail, t_dll *new);
+t_dll	*ft_dclsttrav_to_index(t_dll **tail, int index);
+t_dll	*ft_dclst_find_value(t_dll **tail, int value, int offset);
+t_dll	*ft_dclst_find_lowest_int(t_dll **tail, int offset);
+t_dll	*ft_dclst_find_lowest_abs(t_dll **tail, int offset);
+t_dll	*ft_dclst_find_highest_int(t_dll **tail, int offset);
+bool	ft_dclst_clock_sortd(t_dll **tail, char mode, int offset);
+bool	ft_dclst_circ_sortd(t_dll **tail, char type, char mode, int offset);
+bool	ft_dclst_list_sortd(t_dll **tail, char *type, char mode, int offset);
+int		ft_dclst_dist_head_bidi(t_dll **tail, t_dll *node);
+int		ft_dclst_dist_head_bidi_len(t_dll **tail, t_dll *node, int list_len);
+int		ft_dclst_dist_head_unid(t_dll **tail, t_dll *nd, char mode);
+int		ft_dclst_dist_head_unid_len(t_dll **tail, t_dll *nd, int llen, char mode);
+t_dll	*ft_dclst_find_node(t_dll **tail, t_dll *node);
+void	ft_dclstclear_simple(t_dll **lst);
 
 // printf
 int	ft_printf(const char *input, ...);

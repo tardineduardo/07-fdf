@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_exit.c                                    :+:      :+:    :+:   */
+/*   ft_print_error_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,8 +12,33 @@
 
 #include "../libft.h"
 
-void	ft_error_exit(char *message, int exit_number)
+void	ft_print_error_and_exit(char *message, int exit_number)
 {
 	ft_putstr_fd(message, STDERR_FILENO);
 	exit(exit_number);
 }
+
+bool	ft_print_error_and_false(char *message)
+{
+	ft_putstr_fd(message, STDERR_FILENO);
+	return (false);
+}
+
+bool	ft_print_error_and_true(char *message)
+{
+	ft_putstr_fd(message, STDERR_FILENO);
+	return (true);
+}
+
+void *ft_print_error_and_null(char *message)
+{
+	ft_putstr_fd(message, STDERR_FILENO);
+	return (NULL);
+}
+
+
+
+
+
+
+

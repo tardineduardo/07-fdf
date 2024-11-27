@@ -37,7 +37,7 @@ t_dll *ft_dclst_find_lowest_abs(t_dll **tail, int offset)
 		if (trav == (*tail)->next)
 			break ;
 		if (safe_count == MAXLISTLOOPS || (*tail)->next == NULL)
-			ft_error_exit("List not circular. Check list structure.\n", 1);
+			ft_print_error_and_exit("List not circular. Check list structure.\n", 1);
 	}
 	return (lowest_node);
 }

@@ -1,16 +1,30 @@
-# include "../libft/libft.h"
+#include "../libft/libft.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 
-#include <mlx.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#define WIDTH 256
+#define HEIGHT 256
 
-#define FDF_BUFF 1024
+/*
+ * Main MLX handle, carries important data in regards to the program.
+ * @param window The window itself.
+ * @param context Abstracted opengl data.
+ * @param width The width of the window.
+ * @param height The height of the window.
+ * @param delta_time The time difference between the previous frame and the current frame.
+ */
+
+
 
 typedef struct
 {
-	int	value;
+	int		value;
+	int		r;
+	int		g;
+	int		b;
 	char	*color;
-	int	red;
-	int	gre;
-	int	blu;
 } t_map;
 
 typedef struct
@@ -19,5 +33,8 @@ typedef struct
 	size_t	column_count;
 } t_file;
 
-
 t_map **ft_parse(char *filename);
+
+
+
+

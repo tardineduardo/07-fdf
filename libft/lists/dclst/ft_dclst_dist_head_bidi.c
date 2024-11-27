@@ -24,9 +24,9 @@ int	ft_dclst_dist_head_bidi(t_dll **tail, t_dll *node)
 	i = 0;
 	list_len = ft_dclstsize(tail);
 	if (list_len == -1)
-		ft_error_exit("List size error.\n", 1);
+		ft_print_error_and_exit("List size error.\n", 1);
 	if (list_len == 0)
-		ft_error_exit("List is empty.\n", 1);
+		ft_print_error_and_exit("List is empty.\n", 1);
 	if (list_len == 1)
 		return (0);
 	trav_fwd = node;
@@ -41,5 +41,5 @@ int	ft_dclst_dist_head_bidi(t_dll **tail, t_dll *node)
 		trav_fwd = trav_fwd->next;
 		trav_bck = trav_bck->prev;	
 	}
-	ft_error_exit("ft_dclst_dist_from_head. Invalid parameters: can't find head of the list.\n", 1);
+	ft_print_error_and_exit("ft_dclst_dist_from_head. Invalid parameters: can't find head of the list.\n", 1);
 }

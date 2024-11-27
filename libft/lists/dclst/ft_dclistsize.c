@@ -12,13 +12,13 @@
 
 #include "../../libft.h"
 
-size_t	ft_dclstsize(t_dll **tail)
+int	ft_dclstsize(t_dll **tail)
 {
-	size_t	count_fwd;
+	int		count_fwd;
 	t_dll	*trav_fwd;
 
 	if (*tail == NULL)
-		return (0);
+		return (-1);
 	trav_fwd = *tail;
 	count_fwd = 1;
 	trav_fwd = trav_fwd->next;

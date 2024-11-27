@@ -133,17 +133,44 @@ static char **ft_trim_file(char *filename, t_file *fdf)
 	return (clean);
 }
 
+
+
+
+
+
+
+int	count(void *ptr)
+{
+	int a;
+
+	a = 0;
+	while(ptr)
+	{
+		a++;
+		ptr++;
+	}
+	return (a);
+}
+
+
+
+
 t_map **ft_parse(char *filename)
 {
 	t_file  fdf;
 	t_map   **parsed;
-	char	**clean;
-	char	*test;
+	char	****clean;
 
-	clean = ft_trim_file(filename, &fdf);
-	ft_debug_print_array_of_strings(clean, 1);
-	parsed = ft_alloc_matrix(&fdf);
-	ft_fill_matrix(clean, parsed, &fdf);
-	ft_free_str_array(clean);
+
+
+	clean = ft_split_lines_and_values(ft_parse_all_text_fn(filename));
+
+
+
+	// clean = ft_trim_file(filename, &fdf);
+	// ft_debug_print_array_of_strings(clean, 1);
+	// parsed = ft_alloc_matrix(&fdf);
+	// ft_fill_matrix(clean, parsed, &fdf);
+	// ft_free_str_array(clean);
 	return (parsed);
 }

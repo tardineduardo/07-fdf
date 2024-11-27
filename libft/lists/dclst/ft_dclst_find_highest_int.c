@@ -37,7 +37,7 @@ t_dll *ft_dclst_find_highest_int(t_dll **tail, int offset)
 		if (trav == *tail)
 			break ;
 		if (safe_count == MAXLISTLOOPS || trav == NULL)
-			ft_error_exit("List not circular. Check list structure.\n", 1);
+			ft_print_error_and_exit("List not circular. Check list structure.\n", 1);
 	}
 	return (highest_node);
 }

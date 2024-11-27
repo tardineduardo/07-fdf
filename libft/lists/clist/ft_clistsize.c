@@ -18,7 +18,7 @@ int	ft_clstsize(t_list **tail)
 	t_list	*trav;
 
 	if (*tail == NULL)
-		return (0);
+		return (-1);
 	trav = *tail;
 	counter = 1;
 	trav = trav->next;
