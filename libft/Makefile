@@ -104,6 +104,7 @@ STRING = string/ft_concatenate.c \
 		string/ft_strtrim.c \
 		string/ft_substr.c \
 		string/ft_count_char.c \
+		string/ft_strtok.c \
 
 VALID =	valid/ft_isalnum.c \
 		valid/ft_isalpha.c \

@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
-/*   Updated: 2024/11/20 13:54:41 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:32:36 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 
 }				t_dll;
+
+typedef struct s_token
+{
+	char	*original;
+	char	*current_token;
+	char	*next_token_ptr;
+}				t_token;
 
 typedef long long llong;
 
@@ -137,6 +144,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_concatenate_var(int num, ...);
 char	*ft_concatenate(char *s1, char *s2, char *s3);
 size_t	ft_count_char(char *s, char c);
+char	*ft_strtok(char *string, char *set);
+
 
 
 // printing
@@ -173,6 +182,8 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
+t_list	*ft_lst_find_value(t_list **head, llong value, llong offset);
+
 
 //lists - dlist
 //lists - clist

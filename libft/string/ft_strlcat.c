@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 18:50:47 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/22 21:14:47 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:18:33 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + copy_len] = '\0';
 	return (dst_len + src_len);
 }
-
-// int main(void)
-// {
-// 	char nome[12] = "eduardo";
-// 	char sobrenome[16] = "magalhaes silva";
-// 	// nome = malloc(12 * sizeof(char));
-// 	// sobrenome = malloc(6 * sizeof(char));
-	
-// 	printf("%s\n", nome);
-// 	printf("%s\n", sobrenome);
-// 	int a = strlcat(nome, sobrenome, 4);
-// 	printf("%s\n", nome);
-
-// 	printf("%i\n", a);
-
-// }
-
-

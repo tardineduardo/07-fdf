@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:11:37 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/23 13:11:59 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:05:23 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,6 @@ int main(void)
     printf("\n");
     printf("printf:    %d\nft_printf: %d\n", a15, b15);
     return 0;
-    
-
-    return 0;
+	
 }
 

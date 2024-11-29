@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_char.c                                    :+:      :+:    :+:   */
+/*   ft_lst_find_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 13:00:43 by eduribei          #+#    #+#             */
-/*   Updated: 2024/11/28 15:16:13 by eduribei         ###   ########.fr       */
+/*   Created: 2024/11/28 20:19:28 by eduribei          #+#    #+#             */
+/*   Updated: 2024/11/28 20:26:24 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../../libft.h"
 
-size_t	ft_count_char(char *s, char c)
+t_list *ft_lst_find_value(t_list **head, llong value, llong offset)
 {
-	size_t	count;
-	int		i;
+	t_list *trav;
 
-	count = 0;
-	i = 0;
-	while (s[i] != '\0')
+	if (!head || !(*head))
+		return (NULL);
+
+	trav = *head;
+
+	while (trav)
 	{
-		if (s[i] == c)
-			count++;
-		i++;
+		if (*(llong *)((char *)trav + offset) == value)
+			return (trav);
+		trav = trav->next;
 	}
-	return (count);
+	return (NULL);
 }

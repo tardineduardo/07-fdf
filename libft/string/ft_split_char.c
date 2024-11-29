@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:16:06 by eduribei          #+#    #+#             */
-/*   Updated: 2024/10/23 20:37:41 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:18:07 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static char	*ft_fill(char **results, char *start, size_t count, size_t r_index)
 		return (NULL);
 	}
 	ft_memmove((char *)results[r_index], (char *)start, count);
-	//results[r_index][count] = '\0';
 	return (results[r_index]);
 }
 
@@ -97,7 +96,6 @@ char	**ft_split_char(char const *s, char c)
 	results = ft_calloc((total_substrs + 1), sizeof(char *));
 	if (results == NULL)
 		return (NULL);
-	//results[total_substrs] = NULL;
 	results = ft_get_substrs((char *)s, c, results);
 	return (results);
 }
