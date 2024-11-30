@@ -1,11 +1,16 @@
-#include "../libft/libft.h"
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../libs/libft/libft.h"
+#include "../libs/MLX42/include/MLX42/MLX42.h"
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#define WIDTH 256
-#define HEIGHT 256
+#include <GLFW/glfw3.h>
+#include <X11/Xlib.h>
+
+
+// #define WIDTH 800	
+// #define HEIGHT 600
+//#define BPP sizeof(int32_t)
+
 
 /*
  * Main MLX handle, carries important data in regards to the program.
@@ -33,7 +38,17 @@ typedef struct
 	size_t	column_count;
 } t_file;
 
+
+//USING
+void ft_get_monitor_resolution(uint32_t *screen_w, uint32_t *screen_h);
 t_map **ft_parse(char *filename);
+void ft_error(void);
+
+
+
+//NOT USING
+GLFWmonitor* ft_get_active_monitor(void);
+void draw_line(int x1, int y1, int x2, int y2, void *mlx, void *win);
 
 
 

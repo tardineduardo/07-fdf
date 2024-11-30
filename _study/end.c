@@ -1,5 +1,6 @@
 // discord harndt
 
+#include "../src/fdf.h"
 
 int    end_program(t_win *data)
 {

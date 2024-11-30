@@ -97,6 +97,7 @@ bool	ft_print_error_and_true(char *message);
 void	*ft_print_error_and_null(char *message);
 void	ft_perror_extra(char *extra_argument, char *normal_perror);
 void	ft_perror_exit(char *message, int exit_number) __attribute__((noreturn));
+void	ft_perror_func_exit(char *message, void (*del)(void), int exit_number) __attribute__((noreturn));
 void	*ft_null_and_stderr(char *message); 
 
 // memory

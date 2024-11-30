@@ -28,6 +28,7 @@ DEBUG =	debug/ft_debug_print_array_of_strings.c \
 
 ERROR =	error/ft_print_error_and.c \
 		error/ft_perror_exit.c \
+		error/ft_perror_func_exit.c	\
 		error/ft_perror_extra.c \
 		error/ft_null_and_stderr.c \
 		fds/ft_close.c \

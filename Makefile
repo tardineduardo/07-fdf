@@ -1,24 +1,28 @@
 MAIN =	src/fdf.c \
-		src/parse.c \
+		src/parsing/parse.c \
+		src/utils/utils.c \
+		src/screen/get_monitor_resolution.c \
+
+
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
 CC = cc
 RM = rm -f
 #CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -g
+CFLAGS = -g -DDEBUG=1
 
 NAME = fdf
 
 # Libft Configuration
-LIBFT_PATH = ./libft
+LIBFT_PATH = ./libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # MLX42 Configuration
-LIBMLX_PATH = ./MLX42
+LIBMLX_PATH = ./libs/MLX42
 MLX_BUILD_PATH = $(LIBMLX_PATH)/build
 HEADERS = -I ./include -I $(LIBMLX_PATH)/include
-LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lX11 -lXext
 
 all: libmlx $(NAME)
 

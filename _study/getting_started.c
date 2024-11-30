@@ -1,3 +1,6 @@
+#include "../src/fdf.h"
+
+
 //https://github.com/aurelien-brabant/minilibx-posts-code/blob/master/getting-started-with-the-minilibx.c
 
 #include <stdlib.h>

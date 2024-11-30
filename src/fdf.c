@@ -2,57 +2,53 @@
 
 
 
-
-// Exit the program as failure.
-static void ft_error(void)
-{
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
-
-// Print the window width and height.
-static void ft_hook(void* param)
-{
-	const mlx_t* mlx = param;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
-
 int main(int argc, char *argv[])
 {
+    mlx_t	*mlx;
+    t_map	**parsed;
+    int32_t	screen_width;
+    int32_t	screen_height;
 
+    if (argc != 2)
+        return (1);
 
+	ft_get_monitor_resolution(&screen_width, &screen_height);
 
+    mlx = mlx_init(screen_width*7/10, screen_height*7/10, "Eduardo's FdF", true);
+    if (!mlx)
+       ft_error();
 
-	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Eduardo's FdF", true);
-	if (!mlx)
-		ft_error();
+    // Create a new image of size 256x256
+    mlx_image_t *img = mlx_new_image(mlx, 256, 256);
+    if (!img)
+        return (EXIT_FAILURE);
 
-	/* Do stuff */
-	t_map	**parsed;
+    uint32_t color = 0xFFFF0011; // Fully opaque red
 
-	if (argc != 2)
-		return (1);
-	parsed = ft_parse(argv[1]);
-	/* do stuff */
+    // Draw the top and bottom borders (horizontal lines)
+    for (int x = 0; x < 256; x++)
+    {
+        ((uint32_t *)img->pixels)[0 * 256 + x] = color;          // Top border
+        ((uint32_t *)img->pixels)[255 * 256 + x] = color;        // Bottom border
+    }
 
+    // Draw the left and right borders (vertical lines)
+    for (int y = 0; y < 256; y++)
+    {
+        ((uint32_t *)img->pixels)[y * 256 + 0] = color;          // Left border
+        ((uint32_t *)img->pixels)[y * 256 + 255] = color;        // Right border
+    }
 
+    // Place the image in the center of the window
+    mlx_image_to_window(mlx, img, (screen_width*7/10 - 256) / 2, (screen_height*7/10 - 256) / 2);
 
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
+    mlx_loop(mlx);
+    mlx_terminate(mlx);
+    free(parsed);
 
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	free(parsed);
-	return (EXIT_SUCCESS);
+    return (EXIT_SUCCESS);
 }
+
+
+
+

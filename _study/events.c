@@ -1,3 +1,6 @@
+#include "../src/fdf.h"
+
+
 // https://github.com/aurelien-brabant/minilibx-posts-code/blob/master/events-with-the-minilibx.c
 
 
