@@ -12,6 +12,7 @@
 
 #include "../libft.h"
 
+/* This function only exists to comply with 42's 25-line-per-function limit. */
 void	ft_perror_extra(char *extra_argument, char *normal_perror)
 {
 	ft_putstr_fd(extra_argument, STDERR_FILENO);

@@ -12,6 +12,7 @@
 
 #include "../libft.h"
 
+/* This function only exists to comply with 42's 25-line-per-function limit. */
 void	*ft_null_and_stderr(char *message)
 {
 	ft_putstr_fd(message, STDERR_FILENO);

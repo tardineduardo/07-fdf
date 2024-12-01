@@ -2,7 +2,7 @@
 
 static void ft_get_active_monitor_res(int32_t *scr_w, int32_t *scr_h)
 {
-	const GLFWvidmode *vidmode;
+	const GLFWvidmode	*vidmode;
 
 	if (!glfwInit())
 		ft_perror_exit("Failed to initialize GLFW.\n", errno);

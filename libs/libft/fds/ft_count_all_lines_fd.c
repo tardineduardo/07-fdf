@@ -1,5 +1,6 @@
 #include "../libft.h"
 
+/* fd remains reusable because lseek() restores the file offset. */
 int	ft_count_all_lines_fd(int fd)
 {
 	char	*line;
@@ -26,6 +27,5 @@ int	ft_count_all_lines_fd(int fd)
 I need to change my GNL so it also returns me a flag if newline = NULL,
 but the loop didn't reach EOF (indicating malloc error or read error).
 In these cases, countlines should also raise an issue (ex: return -1).
-
 The lseek error handling is also strange here.
 */

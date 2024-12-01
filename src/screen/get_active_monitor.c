@@ -37,35 +37,29 @@ static GLFWmonitor *ft_which(GLFWmonitor **mns, int mc, double c_x, double c_y)
 
 void get_global_cursor_position(double* x, double* y)
 {
-    Display*	display;
+	Display*	display;
 	Window		root;
 	Window 		ret_root;
 	Window		ret_child;
 
-
 	display = XOpenDisplay(NULL);
-    if (!display)
+	if (!display)
 	{
-        fprintf(stderr, "Unable to open X display\n");
-        return;
-    }
-
-
-    root = DefaultRootWindow(display);
-
-    int root_x, root_y;
-    int win_x, win_y;
-    unsigned int mask;
-
-    if (XQueryPointer(display, root, &ret_root, &ret_child, &root_x, &root_y, &win_x, &win_y, &mask)) 
+		fprintf(stderr, "Unable to open X display\n");
+		return;
+	}
+	root = DefaultRootWindow(display);
+	int root_x, root_y;
+	int win_x, win_y;
+	unsigned int mask;
+	if (XQueryPointer(display, root, &ret_root, &ret_child, &root_x, &root_y, &win_x, &win_y, &mask)) 
 	{
-        *x = root_x;
-        *y = root_y;
-    } else {
-        fprintf(stderr, "Failed to query pointer position\n");
-    }
-
-    XCloseDisplay(display);
+		*x = root_x;
+		*y = root_y;
+	} else {
+		fprintf(stderr, "Failed to query pointer position\n");
+	}
+	XCloseDisplay(display);
 }
 
 

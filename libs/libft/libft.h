@@ -95,6 +95,7 @@ void	ft_print_error_and_exit(char *message, int exit_number) __attribute__((nore
 bool	ft_print_error_and_false(char *message);
 bool	ft_print_error_and_true(char *message);
 void	*ft_print_error_and_null(char *message);
+void	ft_error_free_and_exit(void *p, char *message, int exit_number);
 void	ft_perror_extra(char *extra_argument, char *normal_perror);
 void	ft_perror_exit(char *message, int exit_number) __attribute__((noreturn));
 void	ft_perror_func_exit(char *message, void (*del)(void), int exit_number) __attribute__((noreturn));
@@ -146,8 +147,8 @@ char	*ft_concatenate_var(int num, ...);
 char	*ft_concatenate(char *s1, char *s2, char *s3);
 size_t	ft_count_char(char *s, char c);
 char	*ft_strtok(char *string, char *set);
-
-
+char	*ft_strtok_r(char *input_str, char *delimiters, char **saveptr);
+char	*ft_fn_to_str(char *filename);
 
 // printing
 int		ft_putchar_fd(char c, int fd);
@@ -163,13 +164,10 @@ void	ft_close(int total, ...);
 void	ft_close_two(int fd1, int fd2);
 void	ft_close_three(int fd1, int fd2, int fd3);
 void	ft_close_four(int fd1, int fd2, int fd3, int fd4);
-int		ft_count_nonempty_lines_fp(char *file_path);
 int		ft_count_all_lines_fd(int fd);
-int		ft_count_all_lines_fp(char *file_path);
+int		ft_count_all_lines_fp(char *filename);
 int		ft_count_nonempty_lines_fd(int fd);
-int		ft_count_nonempty_lines_fp(char *file_path);
-char	*ft_parse_all_text_fn(char *filename);
-
+int		ft_count_nonempty_lines_fp(char *filename);
 
 //lists - slist
 void	ft_lstclear_err_exit(t_list **lst, void (*del)(void*), char *e, int n);
@@ -184,7 +182,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lst_find_value(t_list **head, llong value, llong offset);
-
 
 //lists - dlist
 //lists - clist

@@ -27,7 +27,7 @@ static char	*ft_parse_text(int file)
 	return (content);
 }
 
-char	*ft_parse_all_text_fn(char *filename)
+char	*ft_fn_to_str(char *filename)
 {
 	int		file;
 	char	*content;

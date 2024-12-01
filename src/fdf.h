@@ -25,7 +25,9 @@
 
 typedef struct
 {
-	int		value;
+	int		x;
+	int		y;
+	int		z;
 	int		r;
 	int		g;
 	int		b;
@@ -34,22 +36,26 @@ typedef struct
 
 typedef struct
 {
-	size_t	line_count;
-	size_t	column_count;
+	size_t	lines;
+	size_t	cols;
+	char	*save_line;
+	char	*save_point;
 } t_file;
 
-
 //USING
-void ft_get_monitor_resolution(uint32_t *screen_w, uint32_t *screen_h);
-t_map **ft_parse(char *filename);
-void ft_error(void);
+void	ft_get_monitor_resolution(uint32_t *screen_w, uint32_t *screen_h);
+void	ft_transform_map(t_map ****map, u_int32_t scr_w, u_int32_t scr_h);
+void	ft_error(void);
+t_map	***ft_parse(char *filename);
+void	ft_free_map(t_map ***parsed);
 
+//INUTILS
+void	ft_init_count(char *str, t_file *fdf, int *col_check);
+int		ft_columns_in_first_line(char *s);
 
+//DEBUG
+void	ft_debug_print_2D_struct(t_map ****map);
 
 //NOT USING
 GLFWmonitor* ft_get_active_monitor(void);
 void draw_line(int x1, int y1, int x2, int y2, void *mlx, void *win);
-
-
-
-
