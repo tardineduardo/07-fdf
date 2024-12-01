@@ -38,10 +38,9 @@ FDS =	fds/ft_close_four.c \
 		fds/ft_close_two.c \
 		fds/ft_close.c \
 		fds/ft_count_all_lines_fd.c \
-		fds/ft_count_all_lines_fp.c \
+		fds/ft_count_all_lines_fn.c \
 		fds/ft_count_nonempty_lines_fd.c \
-		fds/ft_count_nonempty_lines_fp.c \
-		fds/ft_parse_all_text_fn.c \
+		fds/ft_count_nonempty_lines_fn.c \
 
 SLISTS =	lists/slist/ft_lstadd_back.c \
 			lists/slist/ft_lstadd_front.c \
@@ -106,6 +105,8 @@ STRING = string/ft_concatenate.c \
 		string/ft_substr.c \
 		string/ft_count_char.c \
 		string/ft_strtok.c \
+		string/ft_strtok_r.c \
+		string/ft_fn_to_str.c \
 
 VALID =	valid/ft_isalnum.c \
 		valid/ft_isalpha.c \

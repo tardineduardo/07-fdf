@@ -12,6 +12,7 @@
 
 #include "../libft.h"
 
+/* This function only exists to comply with 42's 25-line-per-function limit. */
 void	ft_perror_func_exit(char *message, void (*del)(void), int exit_number)
 {
 	del();

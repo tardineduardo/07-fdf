@@ -6,19 +6,48 @@ void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void ft_init_fdf(t_file *fdf, int temp_count)
-{
-	fdf->line_count = 0;
-	fdf->column_count = 0;
-	temp_count = 0;
-}
-
-int ft_columns_in_first_line(char *s)
+int ft_columns_in_first_line(char *str)
 {
 	char	*copy;
+	char	*copy_tok;
 	char	*line;
+	int		count;
 
-	copy = ft_strdup(s);
-	line = ft_strtok(copy, "\n");
-	return (ft_split_count(line, " "));
+	copy = ft_strdup(str);
+	line = ft_strtok_r(copy, "\n", &copy_tok);
+	count = ft_split_count(line, ' ');	
+	free(copy);
+	return (count);
+}
+
+void ft_init_count(char *str, t_file *fdf, int *col_check)
+{
+	fdf->cols = ft_columns_in_first_line(str);
+	fdf->lines = 0;
+	col_check = 0;
+	return ;
+}
+
+void ft_free_map(t_map ***parsed)
+{
+	int a;
+	int b;
+
+	if (!parsed)
+		return ;
+	a = 0;
+	while (parsed[a])
+	{
+		b = 0;
+		while (parsed[a][b])
+		{
+			if (parsed[a][b]->color)
+				free(parsed[a][b]->color);
+			free(parsed[a][b]);
+			b++;
+		}
+		free(parsed[a]);
+		a++;
+	}
+	free(parsed);
 }

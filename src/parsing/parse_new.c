@@ -45,11 +45,11 @@ static void ft_fill_matrix(char **clean, t_map **parsed, t_file *fdf)
 	char	**single;
 
 	line = 0;
-	while (line < fdf->line_count)
+	while (line < fdf->lines)
 	{
 		items = ft_split_space(clean[line]);
 		col = 0;
-		while (col < fdf->column_count)
+		while (col < fdf->cols)
 		{
 			single = ft_split_char(items[col], ',');
 			//ft_validate_digits(single);
@@ -71,13 +71,13 @@ static t_map **ft_alloc_matrix(t_file *fdf)
 	t_map **parsed;
 	size_t i;
 
-	parsed = malloc(fdf->line_count * sizeof(t_map *));
+	parsed = malloc(fdf->lines * sizeof(t_map *));
 	if (!parsed)
 		ft_print_error_and_exit("Error: Memory allocation failed.\n", 1);
 	i = 0;
-	while (i < fdf->line_count)
+	while (i < fdf->lines)
 	{
-		parsed[i] = malloc(fdf->column_count * sizeof(t_map));
+		parsed[i] = malloc(fdf->cols * sizeof(t_map));
 		if (!parsed[i])
 			ft_print_error_and_exit("Error: Memory allocation failed.\n", 1);
 		i++;
@@ -93,7 +93,7 @@ static size_t	ft_count_and_validate_columns(char **clean, t_file *fdf)
 
 	count_items_log = ft_split_count(clean[0], ' ');
 	a = 1;
-	while(a < fdf->line_count)
+	while(a < fdf->lines)
 	{
 		count_items = ft_split_count(clean[a], ' ');
 		if (count_items != count_items_log)
@@ -113,13 +113,13 @@ static char **ft_trim_file(char *filename, t_file *fdf)
 	char	*line;
 	char	**clean;
 
-	fdf->line_count = ft_count_nonempty_lines_fp(filename);
-	clean = ft_calloc((fdf->line_count + 1), sizeof(char *));
+	fdf->lines = ft_count_nonempty_lines_fp(filename);
+	clean = ft_calloc((fdf->lines + 1), sizeof(char *));
 	file = open(filename, O_RDONLY);
 	if (file == -1)
 		ft_perror_exit("Error opening file.\n", errno);	
 	i = 0;
-	while (i < fdf->line_count)
+	while (i < fdf->lines)
 	{
 		line = get_next_line(file);
 		if (!line)
@@ -129,7 +129,7 @@ static char **ft_trim_file(char *filename, t_file *fdf)
 		i++;
 	}
 	close(file);
-	fdf->column_count = ft_count_and_validate_columns(clean, fdf);
+	fdf->cols = ft_count_and_validate_columns(clean, fdf);
 	return (clean);
 }
 

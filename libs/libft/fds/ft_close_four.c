@@ -12,6 +12,7 @@
 
 #include "../libft.h"
 
+/* This function only exists to comply with 42's 25-line-per-function limit. */
 void	ft_close_four(int fd1, int fd2, int fd3, int fd4)
 {
 	close(fd1);

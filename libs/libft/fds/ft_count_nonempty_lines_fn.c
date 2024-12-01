@@ -1,12 +1,12 @@
 #include "../libft.h"
 
-int	ft_count_all_lines_fp(char *file_path)
+int	ft_count_nonempty_lines_fn(char *filename)
 {
 	int		file;
 	char	*line;
 	int		count_lines;
 
-	file = open(file_path, O_RDONLY);
+	file = open(filename, O_RDONLY);
 	if (file == -1)
 		return (-1);	
 	count_lines = 0;
@@ -15,6 +15,11 @@ int	ft_count_all_lines_fp(char *file_path)
 		line = get_next_line(file);
 		if (!line)
 			break;
+		if (ft_is_line_empty(line))
+		{
+			free(line);
+			continue ;
+		}
 		count_lines += ft_count_char(line, '\n');
 		free(line);
 	}

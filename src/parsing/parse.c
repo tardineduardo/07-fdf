@@ -29,18 +29,18 @@ static void ft_fill_colors(t_map *map, char *color)
 	return ;
 }
 
-static void	ft_fill_node(char *point, t_map ***map, int a, int b)
+static void	ft_fill_struct(char *point, t_map ****map, int a, int b)
 {
 	char *data;
 	char *save_data;
 
-	map[a][b]->z = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
-	map[a][b]->color = ft_strtok_r(point, " ", &save_data);
-	ft_fill_colors(map[a][b], map[a][b]->color);
+	(*map)[a][b]->z = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
+	(*map)[a][b]->color = ft_strtok_r(NULL, " ", &save_data);
+	ft_fill_colors((*map)[a][b], (*map)[a][b]->color);
 	return ;
 }
 
-static void	ft_fill_matrix(char *str, t_map ***map, t_file *fdf)
+static void	ft_fill_matrix(char *str, t_map ****map, t_file *fdf)
 {
 	int		a;
 	int		b;
@@ -48,68 +48,75 @@ static void	ft_fill_matrix(char *str, t_map ***map, t_file *fdf)
 	char	*point;
 
 	a = 0;
-	line = ft_strtok_r(str, "\n", fdf->save_line);
+	line = ft_strtok_r(str, "\n", &fdf->save_line);
 	while (line != NULL)
 	{
 		b = 0;
-		point = ft_strtok_r(line, " ", fdf->save_point);
+		point = ft_strtok_r(line, " ", &fdf->save_point);
 		while (point != NULL)
 		{
 			ft_fill_struct(point, map, a, b);
-			point = strtok_r(NULL, " ", fdf->save_point);
+			point = ft_strtok_r(NULL, " ", &fdf->save_point);
 			b++;
 		}
-		line = strtok_r(NULL, "\n", fdf->save_line);
+		line = ft_strtok_r(NULL, "\n", &fdf->save_line);
 		a++;
 	}
-	free(str);
 }
 
-static void	ft_allocate_matrix(t_map ***parsed, t_file *fdf)
+static void	ft_allocate_matrix(t_map ****parsed, t_file *fdf)
 {
 	int	a;
+	int	b;
 
-	*parsed = ft_calloc(fdf->line_count + 1, sizeof(t_map*));
-	if (*parsed == NULL)
-		return ;
+	
+	*parsed = ft_calloc(fdf->lines + 1, sizeof(t_map**));
+	//error check
 	a = 0;
-	while (a < fdf->line_count)
+	while (a < fdf->lines)
 	{
-		(*parsed)[a] = ft_calloc(fdf->column_count + 1, sizeof(t_map));
-		if ((*parsed)[a] == NULL)
+		(*parsed)[a] = ft_calloc(fdf->cols + 1, sizeof(t_map*));
+		//error check
+		b = 0;
+		while (b < fdf->cols)
 		{
-			while (--a >= 0)
-				free((*parsed)[a]);
-			return ;
+			(*parsed)[a][b] = ft_calloc(1, sizeof(t_map));
+			//error check
+			b++;
 		}
 		a++;
 	}
 	return ;
 }
 
-static void	ft_count_lines_and_cloumns(char *str, t_file *fdf)
+/* Counts lines and colums; trimm empty lines and validate width. */
+static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 {
+	char	*copy;
 	char	*line;
 	char	*point;
-	int		column_temp;
+	int		col_check;
 
-	column_temp = ft_columns_in_first_line(str);
-	ft_init_zero(fdf, column_temp);
-	line = strtok_r(str, "\n", fdf->save_line);
+	ft_init_count(str, fdf, &col_check);
+	copy = ft_strdup(str);
+	// error_ckeck
+	line = ft_strtok_r(copy, "\n", &fdf->save_line);
 	while (line != NULL)
 	{
-		point = strtok_r(line, " ", fdf->save_point);
+		col_check = 0;
+		point = ft_strtok_r(line, " ", &fdf->save_point);
 		while (point != NULL)
 		{
-			fdf->column_count++;
-			point = strtok_r(NULL, " ", fdf->save_point);
+			col_check++;
+			point = ft_strtok_r(NULL, " ", &fdf->save_point);
 		}
-		if (fdf->column_count != column_temp)
-			ft_print_error_and_exit("Error: irregular width.\n", EXIT_FAILURE);
-		fdf->line_count++;
-		line = strtok_r(NULL, "\n", fdf->save_line);
+		if (fdf->cols != col_check)
+			ft_error_free_and_exit(copy, "Irregular width.\n", EXIT_FAILURE);
+		fdf->lines++;
+		line = strtok_r(NULL, "\n", &fdf->save_line);
 	}
-	free(str);
+	free(copy);
+	return ;
 }
 
 t_map ***ft_parse(char *filename)
@@ -118,14 +125,14 @@ t_map ***ft_parse(char *filename)
 	t_file  fdf;
 	char	*content;
 
-	content = ft_parse_fd_to_string_void(filename);
+	content = ft_fn_to_str(filename);
 	if (!content)
 		return (NULL);
-	ft_count_lines_and_cloumns(ft_strdup(content), &fdf);
-	ft_allocate_matrix(parsed, &fdf);
+	ft_count_trimm_and_validate(content, &fdf);
+	ft_allocate_matrix(&parsed, &fdf);
 	if (!parsed)
 		return (NULL);
-	ft_fill_matrix(content, parsed);
+	ft_fill_matrix(content, &parsed, &fdf);
 	free(content);
 	return (parsed);
 }
