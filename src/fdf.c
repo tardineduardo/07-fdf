@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     mlx_t	*mlx;
-    t_map	**parsed;
+    t_map	***parsed;
     int32_t	screen_width;
     int32_t	screen_height;
 
@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     mlx = mlx_init(screen_width*7/10, screen_height*7/10, "Eduardo's FdF", true);
     if (!mlx)
        ft_error();
+
+	parsed = ft_parse(argv[1]);
+	ft_transform_map(&parsed, screen_width, screen_height);
 
     // Create a new image of size 256x256
     mlx_image_t *img = mlx_new_image(mlx, 256, 256);

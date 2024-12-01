@@ -53,7 +53,7 @@ static void ft_fill_matrix(char **clean, t_map **parsed, t_file *fdf)
 		{
 			single = ft_split_char(items[col], ',');
 			//ft_validate_digits(single);
-			parsed[line][col].value = ft_atoi(single[0]);
+			parsed[line][col].z = ft_atoi(single[0]);
 			if (single[1])
 			   ft_fill_colors(single[1], parsed, line, col);
 			else

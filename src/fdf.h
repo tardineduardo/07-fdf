@@ -25,7 +25,9 @@
 
 typedef struct
 {
-	int		value;
+	float	x;
+	float	y;
+	float	z;
 	int		r;
 	int		g;
 	int		b;
@@ -36,14 +38,21 @@ typedef struct
 {
 	size_t	line_count;
 	size_t	column_count;
+	char	*save_line;
+	char	*save_point;
 } t_file;
+
+
 
 
 //USING
 void ft_get_monitor_resolution(uint32_t *screen_w, uint32_t *screen_h);
-t_map **ft_parse(char *filename);
+void ft_transform_map(t_map ***map, u_int32_t scr_w, u_int32_t scr_h);
+t_map ***ft_parse(char *filename);
 void ft_error(void);
 
+//DEBUG
+void	ft_debug_print_2D_struct(t_map ***map);
 
 
 //NOT USING
