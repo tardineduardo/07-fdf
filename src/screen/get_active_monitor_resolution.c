@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-static void ft_get_active_monitor_res(int32_t *scr_w, int32_t *scr_h)
+static void ft_get_active_monitor_res(t_sizes *size)
 {
 	const GLFWvidmode	*vidmode;
 
@@ -9,7 +9,7 @@ static void ft_get_active_monitor_res(int32_t *scr_w, int32_t *scr_h)
 	vidmode = glfwGetVideoMode(ft_get_active_monitor());
 	if (!vidmode)
 		ft_perror_func_exit("Failed to get vid mode.\n", glfwTerminate, errno);
-	*scr_w = vidmode->width;
-	*scr_h = vidmode->height;
+	size->scr_w = vidmode->width;
+	size->scr_h = vidmode->height;
 	glfwTerminate();
 }

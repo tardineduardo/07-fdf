@@ -4,6 +4,7 @@
 		"fdf.h": "c",
 		"mlx42.h": "c",
 		"mlx42_int.h": "c",
-		"xlib.h": "c"
+		"xlib.h": "c",
+		"math.h": "c"
 	}
 }

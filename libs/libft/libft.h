@@ -62,13 +62,6 @@ typedef struct s_dlist
 
 }				t_dll;
 
-typedef struct s_token
-{
-	char	*original;
-	char	*current_token;
-	char	*next_token_ptr;
-}				t_token;
-
 typedef long long llong;
 
 // conversions + comparisons

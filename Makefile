@@ -4,7 +4,8 @@ MAIN =	src/fdf.c \
 		src/screen/get_monitor_resolution.c \
 		src/transform/transform_map.c \
 		src/debug/ft_debug_print_2D_struct.c \
-		
+		src/screen/set_sizes.c \
+		src/drawing/draw.c \
 
 
 OBJS_SRC = $(MAIN:.c=.o) 
@@ -24,7 +25,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBMLX_PATH = ./libs/MLX42
 MLX_BUILD_PATH = $(LIBMLX_PATH)/build
 HEADERS = -I ./include -I $(LIBMLX_PATH)/include
-LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lX11 -lXext
+LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 all: libmlx $(NAME)
 
