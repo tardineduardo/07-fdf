@@ -11,7 +11,12 @@ void	ft_debug_print_2D_struct(t_map ****map)
 		b = 0;
 		while((*map)[a][b])
 		{
-			printf("[%i, %s]\t", (*map)[a][b]->z, (*map)[a][b]->color);
+			if ((*map)[a][b]->color)
+				printf("[%i, %s]\t", (*map)[a][b]->z, (*map)[a][b]->color);
+			else
+				printf("[%i, NULL]\t", (*map)[a][b]->z);
+
+
 			b++;
 		}
 		printf("\n");	
