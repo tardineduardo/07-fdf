@@ -20,9 +20,9 @@ static void putPixel(mlx_image_t* image, int x, int y, float brightness, uint32_
     mlx_put_pixel(image, x, y, blendedColor);
 }
 
-void draw_line_xiaolim(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color)
+void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color)
 {
-    int steep = fabs(y1 - y0) > fabs(x1 - x0);
+    int steep = abs(y1 - y0) > abs(x1 - x0);
     if (steep) {
         int temp = x0; x0 = y0; y0 = temp;
         temp = x1; x1 = y1; y1 = temp;
@@ -46,6 +46,53 @@ void draw_line_xiaolim(mlx_image_t* image, int x0, int y0, int x1, int y1, uint3
     xEnd = round(x1);
     yEnd = y1 + gradient * (xEnd - x1);
     xGap = x1 + 0.5 - floor(x1 + 0.5);
+    int xPixel2 = xEnd, yPixel2 = (int)yEnd;
+    if (steep) {
+        putPixel(image, yPixel2, xPixel2, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
+        putPixel(image, yPixel2 + 1, xPixel2, (yEnd - floor(yEnd)) * xGap, color);
+    } else {
+        putPixel(image, xPixel2, yPixel2, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
+        putPixel(image, xPixel2, yPixel2 + 1, (yEnd - floor(yEnd)) * xGap, color);
+    }
+    for (int x = xPixel1 + 1; x < xPixel2; x++) {
+        if (steep) {
+            putPixel(image, (int)interY, x, 1.0 - (interY - floor(interY)), color);
+            putPixel(image, (int)interY + 1, x, interY - floor(interY), color);
+        } else {
+            putPixel(image, x, (int)interY, 1.0 - (interY - floor(interY)), color);
+            putPixel(image, x, (int)interY + 1, interY - floor(interY), color);
+        }
+        interY += gradient;
+    }
+}
+
+
+void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color)
+{
+    int steep = abs(end->y - start->y) > abs(end->x - start->x);
+    if (steep) {
+        int temp = start->x; start->x = start->y; start->y = temp;
+        temp = end->x; end->x = end->y; end->y = temp;
+    }
+    if (start->x > end->x) {
+        int temp = start->x; start->x = end->x; end->x = temp;
+        temp = start->y; start->y = end->y; end->y = temp;
+    }
+    float dx = end->x - start->x, dy = end->y - start->y, gradient = dy / dx;
+    float xEnd = round(start->x), yEnd = start->y + gradient * (xEnd - start->x);
+    float xGap = 1.0 - (start->x + 0.5 - floor(start->x + 0.5));
+    int xPixel1 = xEnd, yPixel1 = (int)yEnd;
+    if (steep) {
+        putPixel(image, yPixel1, xPixel1, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
+        putPixel(image, yPixel1 + 1, xPixel1, (yEnd - floor(yEnd)) * xGap, color);
+    } else {
+        putPixel(image, xPixel1, yPixel1, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
+        putPixel(image, xPixel1, yPixel1 + 1, (yEnd - floor(yEnd)) * xGap, color);
+    }
+    float interY = yEnd + gradient;
+    xEnd = round(end->x);
+    yEnd = end->y + gradient * (xEnd - end->x);
+    xGap = end->x + 0.5 - floor(end->x + 0.5);
     int xPixel2 = xEnd, yPixel2 = (int)yEnd;
     if (steep) {
         putPixel(image, yPixel2, xPixel2, 1.0 - (yEnd - floor(yEnd)) * xGap, color);

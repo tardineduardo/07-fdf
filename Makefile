@@ -6,7 +6,8 @@ MAIN =	src/fdf.c \
 		src/debug/ft_debug_print_2D_struct.c \
 		src/screen/set_sizes.c \
 		src/drawing/draw.c \
-
+		src/colors/colors.c \
+		src/drawing/xiaolim.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 

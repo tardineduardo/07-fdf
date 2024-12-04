@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-void	ft_debug_print_2D_struct(t_map ****map)
+void	ft_debug_print_2D_struct(t_point ****map)
 {
 	int	a;
 	int	b;
@@ -12,9 +12,9 @@ void	ft_debug_print_2D_struct(t_map ****map)
 		while((*map)[a][b])
 		{
 			if ((*map)[a][b]->color)
-				printf("[%i, %s]\t", (*map)[a][b]->z, (*map)[a][b]->color);
+				printf("[%i, %i, %i, %s]\t", (*map)[a][b]->x, (*map)[a][b]->y, (*map)[a][b]->z, (*map)[a][b]->color);
 			else
-				printf("[%i, NULL]\t", (*map)[a][b]->z);
+				printf("[%i, %i, %i]\t", (*map)[a][b]->x, (*map)[a][b]->y, (*map)[a][b]->z);
 
 
 			b++;

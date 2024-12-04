@@ -1,15 +1,17 @@
-void	render_background(t_img *img, int color)
+#include "../fdf.h"
+
+void	ft_background(t_sizes *size, mlx_image_t *img, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < WINDOW_HEIGHT)
+	while (i < size->win_h)
 	{
 		j = 0;
-		while (j < WINDOW_WIDTH)
+		while (j < size->win_w)
 		{
-			img_pix_put(img, j++, i, color);
+			mlx_put_pixel(img, j++, i, color);
 		}
 		++i;
 	}

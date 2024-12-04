@@ -17,14 +17,19 @@
  * @param delta_time The time difference between the previous frame and the current frame.
  */
 
-typedef struct
-{
-    uint32_t	color;
-    mlx_image_t *image;
-} t_draw;
 
+// typedef struct mlx_image
+// {
+// 	const uint32_t	width;
+// 	const uint32_t	height;
+// 	uint8_t*		pixels;
+// 	mlx_instance_t*	instances;
+// 	size_t			count;
+// 	bool			enabled;
+// 	void*			context;
+// }	mlx_image_t;
 
-typedef struct
+typedef struct sizes
 {
     int32_t	scr_w;
     int32_t	scr_h;
@@ -34,7 +39,7 @@ typedef struct
     int32_t	img_h;
 }	t_sizes;
 
-typedef struct
+typedef struct point
 {
 	int		x;
 	int		y;
@@ -42,10 +47,13 @@ typedef struct
 	int		r;
 	int		g;
 	int		b;
+	int		map_w;
+	int		map_h;
+	int		rgba;
 	char	*color;
-} t_map;
+} t_point;
 
-typedef struct
+typedef struct file
 {
 	size_t	lines;
 	size_t	cols;
@@ -56,20 +64,37 @@ typedef struct
 //USING
 void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
-void	ft_transform_map(t_map ****map, u_int32_t scr_w, u_int32_t scr_h);
+void ft_transform_map(t_point ****map, mlx_image_t *img);
 void	ft_error(void);
-t_map	***ft_parse(char *filename);
-void	ft_free_map(t_map ***parsed);
-void draw_grid(mlx_image_t *image, t_map ***matrix, t_sizes *sizes, uint32_t color);
+t_point	***ft_parse(char *filename);
+void	ft_free_map(t_point ***parsed);
+void draw_grid(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
+void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color);
+void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color);
+void test(mlx_image_t *img, t_point ****map, t_sizes *size);
+void draw_lines(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
 
+
+
+//COLORS
+int ft_get_rgba(int r, int ft_g, int b, int a);
+int ft_get_r(int rgba);
+int ft_get_g(int rgba);
+int ft_get_b(int rgba);
+int ft_get_a(int rgba);
 
 //INUTILS
 void	ft_init_count(char *str, t_file *fdf, int *col_check);
 int		ft_columns_in_first_line(char *s);
 
 //DEBUG
-void	ft_debug_print_2D_struct(t_map ****map);
+void	ft_debug_print_2D_struct(t_point ****map);
 
 //NOT USING
 //GLFWmonitor* ft_get_active_monitor(void);
 //void draw_line(int x1, int y1, int x2, int y2, void *mlx, void *win);
+
+
+
+
+

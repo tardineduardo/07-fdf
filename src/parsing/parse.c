@@ -1,46 +1,28 @@
 #include "../fdf.h"
 
-static void ft_fill_colors(t_map *map, char *color)
+static void	ft_fill_point_struct(char *point, t_point *map, t_file *fdf)
 {
-	char *trimm;
-	char *r;
-	char *g;
-	char *b;
+	char	*charcolor;
+	char	*data;
+	char	*save_data;
 
-	if (color)
+	map->z = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
+	charcolor = ft_strtok_r(NULL, " ", &save_data);
+	if (charcolor)
 	{
-		if (ft_strnstr(color, "0x", 2) || ft_strnstr(color, "0X", 2))
-			trimm = &color[2];
-		r = ft_substr(trimm, 0, 2);	
-		g = ft_substr(trimm, 2, 2);	
-		b = ft_substr(trimm, 4, 2);	
-		map->r = ft_atohx(r);
-		map->g = ft_atohx(g);
-		map->b = ft_atohx(b);
-		ft_free(3, r, g, b);
-	}
-	else
-	{
-		map->color = NULL;
-		map->r = -1;
-		map->g = -1;
-		map->b = -1;
-	}
+		map->rgba = (int)ft_atohx(charcolor);
+		map->r = ft_get_r(map->rgba);
+		map->g = ft_get_g(map->rgba);
+		map->b = ft_get_b(map->rgba);
+		map->b = ft_get_a(map->rgba);
+
+	}	
+	map->map_w = fdf->cols;
+	map->map_h = fdf->lines;
 	return ;
 }
 
-static void	ft_fill_struct(char *point, t_map ****map, int a, int b)
-{
-	char *data;
-	char *save_data;
-
-	(*map)[a][b]->z = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
-	(*map)[a][b]->color = ft_strtok_r(NULL, " ", &save_data);
-	ft_fill_colors((*map)[a][b], (*map)[a][b]->color);
-	return ;
-}
-
-static void	ft_fill_matrix(char *str, t_map ****map, t_file *fdf)
+static void	ft_fill_matrix(char *str, t_point ****map, t_file *fdf)
 {
 	int		a;
 	int		b;
@@ -55,7 +37,7 @@ static void	ft_fill_matrix(char *str, t_map ****map, t_file *fdf)
 		point = ft_strtok_r(line, " ", &fdf->save_point);
 		while (point != NULL)
 		{
-			ft_fill_struct(point, map, a, b);
+			ft_fill_point_struct(point, (*map)[a][b], fdf);
 			point = ft_strtok_r(NULL, " ", &fdf->save_point);
 			b++;
 		}
@@ -64,23 +46,23 @@ static void	ft_fill_matrix(char *str, t_map ****map, t_file *fdf)
 	}
 }
 
-static void	ft_allocate_matrix(t_map ****parsed, t_file *fdf)
+static void	ft_allocate_matrix(t_point ****point, t_file *fdf)
 {
 	int	a;
 	int	b;
 
 	
-	*parsed = ft_calloc(fdf->lines + 1, sizeof(t_map**));
+	*point = ft_calloc(fdf->lines + 1, sizeof(t_point**));
 	//error check
 	a = 0;
 	while (a < fdf->lines)
 	{
-		(*parsed)[a] = ft_calloc(fdf->cols + 1, sizeof(t_map*));
+		(*point)[a] = ft_calloc(fdf->cols + 1, sizeof(t_point*));
 		//error check
 		b = 0;
 		while (b < fdf->cols)
 		{
-			(*parsed)[a][b] = ft_calloc(1, sizeof(t_map));
+			(*point)[a][b] = ft_calloc(1, sizeof(t_point));
 			//error check
 			b++;
 		}
@@ -119,9 +101,9 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 	return ;
 }
 
-t_map ***ft_parse(char *filename)
+t_point ***ft_parse(char *filename)
 {
-	t_map   ***parsed;
+	t_point   ***point;
 	t_file  fdf;
 	char	*content;
 
@@ -129,10 +111,10 @@ t_map ***ft_parse(char *filename)
 	if (!content)
 		return (NULL);
 	ft_count_trimm_and_validate(content, &fdf);
-	ft_allocate_matrix(&parsed, &fdf);
-	if (!parsed)
+	ft_allocate_matrix(&point, &fdf);
+	if (!point)
 		return (NULL);
-	ft_fill_matrix(content, &parsed, &fdf);
+	ft_fill_matrix(content, &point, &fdf);
 	free(content);
-	return (parsed);
+	return (point);
 }

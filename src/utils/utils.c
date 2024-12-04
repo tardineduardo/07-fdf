@@ -28,7 +28,7 @@ void ft_init_count(char *str, t_file *fdf, int *col_check)
 	return ;
 }
 
-void ft_free_map(t_map ***parsed)
+void ft_free_map(t_point ***parsed)
 {
 	int a;
 	int b;
