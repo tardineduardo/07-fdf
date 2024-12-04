@@ -69,6 +69,26 @@ void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint
 
 void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color)
 {
+    // Special case for vertical lines
+    if (start->x == end->x) {
+        int y_start = start->y;
+        int y_end = end->y;
+        
+        // Ensure y_start is smaller
+        if (y_start > y_end) {
+            int temp = y_start;
+            y_start = y_end;
+            y_end = temp;
+        }
+        
+        // Draw the vertical line directly
+        for (int y = y_start; y <= y_end; y++) {
+            putPixel(image, start->x, y, 1.0, color);
+        }
+        return;
+    }
+
+    // Original code for non-vertical lines
     int steep = abs(end->y - start->y) > abs(end->x - start->x);
     if (steep) {
         int temp = start->x; start->x = start->y; start->y = temp;

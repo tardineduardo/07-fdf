@@ -8,6 +8,7 @@ MAIN =	src/fdf.c \
 		src/drawing/draw.c \
 		src/colors/colors.c \
 		src/drawing/xiaolim.c \
+		src/drawing/bresenham.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 

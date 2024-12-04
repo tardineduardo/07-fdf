@@ -6,7 +6,7 @@
 #include <math.h>
 
 #define BPP sizeof(int32_t)
-#define PCT_OF_SCREEN 70
+#define PCT_OF_SCREEN 80
 #define PCT_OF_WINDOW 100
 /*
  * Main MLX handle, carries important data in regards to the program.
@@ -37,6 +37,8 @@ typedef struct sizes
     int32_t	win_h;
     int32_t	img_w;
     int32_t	img_h;
+    int32_t	map_w;
+    int32_t	map_h;	
 }	t_sizes;
 
 typedef struct point
@@ -47,8 +49,6 @@ typedef struct point
 	int		r;
 	int		g;
 	int		b;
-	int		map_w;
-	int		map_h;
 	int		rgba;
 	char	*color;
 } t_point;
@@ -64,15 +64,21 @@ typedef struct file
 //USING
 void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
-void ft_transform_map(t_point ****map, mlx_image_t *img);
+void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size);
+void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size);
+
+
 void	ft_error(void);
-t_point	***ft_parse(char *filename);
+t_point	***ft_parse(char *filename,	t_sizes *size);
 void	ft_free_map(t_point ***parsed);
+
+void draw_line_bresenham(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
 void draw_grid(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
 void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color);
 void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color);
 void test(mlx_image_t *img, t_point ****map, t_sizes *size);
-void draw_lines(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
+void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color);
+void draw_vertical_lines(mlx_image_t *img, t_point ***map, t_sizes *size, uint32_t color);
 
 
 

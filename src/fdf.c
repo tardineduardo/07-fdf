@@ -1,24 +1,23 @@
 #include "fdf.h"
 
-#define RED_PIXEL 0xFF0000
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
+
 
 
 void	ft_background(t_sizes *size, mlx_image_t *img, int color)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (i < size->win_h)
+	y = 0;
+	while (y < size->img_h)
 	{
-		j = 0;
-		while (j < size->win_w)
+		x = 0;
+		while (x < size->img_w)
 		{
-			mlx_put_pixel(img, j++, i, color);
+			mlx_put_pixel(img, x, y, color);
+			x++;
 		}
-		++i;
+		y++;
 	}
 }
 
@@ -33,33 +32,36 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		return (1);
 
-	point = ft_parse(argv[1]);
+	point = ft_parse(argv[1], &size);
 	if (!point)
 		return (ft_printf("Error parsing file.\n", 1));
 
 	ft_get_monitor_resolution(&size);
 	ft_set_win_and_img_sizes(&size);
 
-
-
-
-	mlx = mlx_init(500, 500, "Eduardo's FdF", true);
+	mlx = mlx_init(size.win_w, size.win_h, "Eduardo's FdF", true);
 	if (!mlx)
 	   ft_error();
 
-	mlx_image_t *img = mlx_new_image(mlx, 500, 500);
+	mlx_image_t *img = mlx_new_image(mlx, size.img_w, size.img_h);
 	if (!img)
 		ft_error();
 
-	ft_transform_map(&point, img);
-	ft_debug_print_2D_struct(&point);
 
-	ft_background(&size, img, 0xffc49678);
-	test(img, &point, &size);
-	//draw_lines(img, point, &size, 0xff000000);
+	ft_transform_map_iso(&point, img, &size);
+	draw_horizontal_lines(img, point, &size, 0xffffffff);
+	draw_vertical_lines(img, point, &size, 0xffffffff);
 
+	// ft_transform_map(&point, img, &size);
+	// draw_horizontal_lines(img, point, &size, 0xffffffff);
+	// draw_vertical_lines(img, point, &size, 0xffffffff);
+
+
+	//ft_background(&size, img, 0xff000000);
+	//test(img, &point, &size);
 
 	mlx_image_to_window(mlx, img, 0, 0);
+
 
 
 	mlx_loop(mlx);

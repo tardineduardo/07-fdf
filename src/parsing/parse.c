@@ -16,9 +16,7 @@ static void	ft_fill_point_struct(char *point, t_point *map, t_file *fdf)
 		map->b = ft_get_b(map->rgba);
 		map->b = ft_get_a(map->rgba);
 
-	}	
-	map->map_w = fdf->cols;
-	map->map_h = fdf->lines;
+	}
 	return ;
 }
 
@@ -101,7 +99,7 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 	return ;
 }
 
-t_point ***ft_parse(char *filename)
+t_point ***ft_parse(char *filename, t_sizes	*size)
 {
 	t_point   ***point;
 	t_file  fdf;
@@ -115,6 +113,8 @@ t_point ***ft_parse(char *filename)
 	if (!point)
 		return (NULL);
 	ft_fill_matrix(content, &point, &fdf);
+	size->map_w = fdf.cols;
+	size->map_h = fdf.lines;	
 	free(content);
 	return (point);
 }
