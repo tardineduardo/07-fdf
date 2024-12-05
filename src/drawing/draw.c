@@ -16,6 +16,7 @@ void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, ui
             start = point[y][x];
             end = point[y][x + 1];
             draw_line_xiaolim(img, start, end, color);
+			//draw_line_bresenham(img, start, end, color);
             x++; // Increment x to avoid an infinite loop
         }
         y++;

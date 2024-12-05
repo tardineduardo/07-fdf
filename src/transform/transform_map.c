@@ -20,7 +20,7 @@ void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size)
         while ((*map)[a][b])
         {
             // Use precomputed values for efficiency
-            (*map)[a][b]->x = b * square_width + square_half_width;
+            (*map)[a][b]->x = b * square_height + square_half_width;
             (*map)[a][b]->y = a * square_height + square_half_height;
 
             // Debugging output

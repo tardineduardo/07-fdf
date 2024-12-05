@@ -6,7 +6,7 @@
 #include <math.h>
 
 #define BPP sizeof(int32_t)
-#define PCT_OF_SCREEN 80
+#define PCT_OF_SCREEN 50
 #define PCT_OF_WINDOW 100
 /*
  * Main MLX handle, carries important data in regards to the program.
