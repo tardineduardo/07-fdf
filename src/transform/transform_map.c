@@ -20,11 +20,11 @@ void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size)
         while ((*map)[a][b])
         {
             // Use precomputed values for efficiency
-            (*map)[a][b]->x = b * square_height + square_half_width;
-            (*map)[a][b]->y = a * square_height + square_half_height;
+            (*map)[a][b]->x0 = b * square_height + square_half_width;
+            (*map)[a][b]->y0 = a * square_height + square_half_height;
 
             // Debugging output
-            ft_printf("[x = %i y = %i] ", (*map)[a][b]->x, (*map)[a][b]->y);
+            ft_printf("[x = %i y = %i] ", (*map)[a][b]->x0, (*map)[a][b]->y0);
 
             b++;
         }
@@ -57,15 +57,15 @@ void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size)
             prev_y = a * scale;
 
             // Isometric projection
-            (*map)[a][b]->x = (prev_x - prev_y) * cos(angle_x);
-            (*map)[a][b]->y = (prev_x + prev_y) * sin(angle_y) ;
+            (*map)[a][b]->x0 = (prev_x - prev_y) * cos(angle_x);
+            (*map)[a][b]->y0 = (prev_x + prev_y) * sin(angle_y) ;
 
             // Center the projection
-            (*map)[a][b]->x += img->width / 2;
-            (*map)[a][b]->y += img->height / 3;
+            (*map)[a][b]->x0 += img->width / 2;
+            (*map)[a][b]->y0 += img->height / 3;
 
-            ft_printf("[x = %i ", (*map)[a][b]->x);
-            ft_printf("y = %i]", (*map)[a][b]->y);
+            ft_printf("[x = %i ", (*map)[a][b]->x0);
+            ft_printf("y = %i]", (*map)[a][b]->y0);
             b++;
         }
         ft_printf("\n");

@@ -12,9 +12,9 @@ void	ft_debug_print_2D_struct(t_point ****map)
 		while((*map)[a][b])
 		{
 			if ((*map)[a][b]->color)
-				printf("[%i, %i, %i, %s]\t", (*map)[a][b]->x, (*map)[a][b]->y, (*map)[a][b]->z, (*map)[a][b]->color);
+				printf("[%i, %i, %i, %s]\t", (*map)[a][b]->x0, (*map)[a][b]->y0, (*map)[a][b]->z0, (*map)[a][b]->color);
 			else
-				printf("[%i, %i, %i]\t", (*map)[a][b]->x, (*map)[a][b]->y, (*map)[a][b]->z);
+				printf("[%i, %i, %i]\t", (*map)[a][b]->x0, (*map)[a][b]->y0, (*map)[a][b]->z0);
 
 
 			b++;

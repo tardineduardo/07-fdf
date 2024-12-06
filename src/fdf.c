@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 	t_sizes	size;
 	t_point	***point;
 
+
 	if (argc != 2)
 		return (1);
 

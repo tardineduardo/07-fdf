@@ -15,7 +15,8 @@ void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, ui
         {
             start = point[y][x];
             end = point[y][x + 1];
-            draw_line_xiaolim(img, start, end, color);
+            //draw_line_xiaolim(img, start, end, color);
+			drawgl(img, start, end, color);
 			//draw_line_bresenham(img, start, end, color);
             x++; // Increment x to avoid an infinite loop
         }
@@ -38,7 +39,8 @@ void draw_vertical_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint
         {
             start = point[y][x];       // Current point
             end = point[y + 1][x];     // Point below
-            draw_line_xiaolim(img, start, end, color);
+            //draw_line_xiaolim(img, start, end, color);
+			drawgl(img, start, end, color);
 			//draw_line_bresenham(img, start, end, color);
 
 
@@ -63,7 +65,7 @@ void test(mlx_image_t *img, t_point ****map, t_sizes *size)
 		b = 0;
 		while(b < size->map_w)
 		{
-			mlx_put_pixel(img, (*map)[a][b]->x, (*map)[a][b]->y, 0xffffffff);
+			mlx_put_pixel(img, (*map)[a][b]->x0, (*map)[a][b]->y0, 0xffffffff);
 			b++;
 		}
 		a++;

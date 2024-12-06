@@ -6,7 +6,7 @@ static void	ft_fill_point_struct(char *point, t_point *map, t_file *fdf)
 	char	*data;
 	char	*save_data;
 
-	map->z = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
+	map->z0 = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
 	charcolor = ft_strtok_r(NULL, " ", &save_data);
 	if (charcolor)
 	{
@@ -36,6 +36,8 @@ static void	ft_fill_matrix(char *str, t_point ****map, t_file *fdf)
 		while (point != NULL)
 		{
 			ft_fill_point_struct(point, (*map)[a][b], fdf);
+			(*map)[a][b]->x0 = b;
+			(*map)[a][b]->y0 = a;
 			point = ft_strtok_r(NULL, " ", &fdf->save_point);
 			b++;
 		}

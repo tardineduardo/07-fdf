@@ -43,9 +43,12 @@ typedef struct sizes
 
 typedef struct point
 {
-	int		x;
-	int		y;
-	int		z;
+	int		x0;
+	int		y0;
+	int		z0;
+	int		x1;
+	int		y1;
+	int		z1;
 	int		r;
 	int		g;
 	int		b;
@@ -66,6 +69,7 @@ void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
 void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size);
 void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size);
+void drawgl(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
 
 
 void	ft_error(void);

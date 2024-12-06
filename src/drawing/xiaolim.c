@@ -70,9 +70,9 @@ void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint
 void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color)
 {
     // Special case for vertical lines
-    if (start->x == end->x) {
-        int y_start = start->y;
-        int y_end = end->y;
+    if (start->x0 == end->x0) {
+        int y_start = start->y0;
+        int y_end = end->y0;
         
         // Ensure y_start is smaller
         if (y_start > y_end) {
@@ -83,24 +83,24 @@ void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_
         
         // Draw the vertical line directly
         for (int y = y_start; y <= y_end; y++) {
-            putPixel(image, start->x, y, 1.0, color);
+            putPixel(image, start->x0, y, 1.0, color);
         }
         return;
     }
 
     // Original code for non-vertical lines
-    int steep = abs(end->y - start->y) > abs(end->x - start->x);
+    int steep = abs(end->y0 - start->y0) > abs(end->x0 - start->x0);
     if (steep) {
-        int temp = start->x; start->x = start->y; start->y = temp;
-        temp = end->x; end->x = end->y; end->y = temp;
+        int temp = start->x0; start->x0 = start->y0; start->y0 = temp;
+        temp = end->x0; end->x0 = end->y0; end->y0 = temp;
     }
-    if (start->x > end->x) {
-        int temp = start->x; start->x = end->x; end->x = temp;
-        temp = start->y; start->y = end->y; end->y = temp;
+    if (start->x0 > end->x0) {
+        int temp = start->x0; start->x0 = end->x0; end->x0 = temp;
+        temp = start->y0; start->y0 = end->y0; end->y0 = temp;
     }
-    float dx = end->x - start->x, dy = end->y - start->y, gradient = dy / dx;
-    float xEnd = round(start->x), yEnd = start->y + gradient * (xEnd - start->x);
-    float xGap = 1.0 - (start->x + 0.5 - floor(start->x + 0.5));
+    float dx = end->x0 - start->x0, dy = end->y0 - start->y0, gradient = dy / dx;
+    float xEnd = round(start->x0), yEnd = start->y0 + gradient * (xEnd - start->x0);
+    float xGap = 1.0 - (start->x0 + 0.5 - floor(start->x0 + 0.5));
     int xPixel1 = xEnd, yPixel1 = (int)yEnd;
     if (steep) {
         putPixel(image, yPixel1, xPixel1, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
@@ -110,9 +110,9 @@ void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_
         putPixel(image, xPixel1, yPixel1 + 1, (yEnd - floor(yEnd)) * xGap, color);
     }
     float interY = yEnd + gradient;
-    xEnd = round(end->x);
-    yEnd = end->y + gradient * (xEnd - end->x);
-    xGap = end->x + 0.5 - floor(end->x + 0.5);
+    xEnd = round(end->x0);
+    yEnd = end->y0 + gradient * (xEnd - end->x0);
+    xGap = end->x0 + 0.5 - floor(end->x0 + 0.5);
     int xPixel2 = xEnd, yPixel2 = (int)yEnd;
     if (steep) {
         putPixel(image, yPixel2, xPixel2, 1.0 - (yEnd - floor(yEnd)) * xGap, color);
