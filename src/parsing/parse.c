@@ -11,10 +11,10 @@ static void	ft_fill_point_struct(char *point, t_point *map, t_file *fdf)
 	if (charcolor)
 	{
 		map->rgba = (int)ft_atohx(charcolor);
-		map->r = ft_get_r(map->rgba);
-		map->g = ft_get_g(map->rgba);
-		map->b = ft_get_b(map->rgba);
-		map->b = ft_get_a(map->rgba);
+		// map->r = ft_get_r(map->rgba);
+		// map->g = ft_get_g(map->rgba);
+		// map->b = ft_get_b(map->rgba);
+		// map->b = ft_get_a(map->rgba);
 
 	}
 	return ;

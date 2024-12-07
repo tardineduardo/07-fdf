@@ -51,7 +51,8 @@ int main(int argc, char *argv[])
 	ft_background(&size, img, 0xffff0000);
 //	ft_transform_map(&point, img, &size);
 
-	ft_transform_map_iso(&point, img, &size);
+
+	ft_transform_map(&point, img, &size);
 	draw_horizontal_lines(img, point, &size, 0xffffffff);
 	draw_vertical_lines(img, point, &size, 0xffffffff);
 
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
 	// draw_vertical_lines(img, point, &size, 0xffffffff);
 
 
-	test(img, &point, &size);
+	//test(img, &point, &size);
 
 	mlx_image_to_window(mlx, img, 0, 0);
 

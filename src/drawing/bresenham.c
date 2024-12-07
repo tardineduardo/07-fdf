@@ -1,7 +1,4 @@
 #include "../fdf.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-
 
 void putPixel(mlx_image_t *image, int x, int y, uint32_t color)
 {
@@ -11,13 +8,13 @@ void putPixel(mlx_image_t *image, int x, int y, uint32_t color)
 }
 
 
-void drawgl(mlx_image_t *image, t_point *start, t_point *end, uint32_t color)
-{
-	glBegin(GL_LINES);
-	glVertex2f(start->x0, start->y0);
-	glVertex2f(end->x0, end->y0);
-	glEnd();
-}
+// void drawgl(mlx_image_t *image, t_point *start, t_point *end, uint32_t color)
+// {
+// 	glBegin(GL_LINES);
+// 	glVertex2f(start->x0, start->y0);
+// 	glVertex2f(end->x0, end->y0);
+// 	glEnd();
+// }
 
 void draw_line_bresenham(mlx_image_t *image, t_point *start, t_point *end, uint32_t color)
 {

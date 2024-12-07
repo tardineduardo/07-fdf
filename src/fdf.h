@@ -8,6 +8,8 @@
 #define BPP sizeof(int32_t)
 #define PCT_OF_SCREEN 50
 #define PCT_OF_WINDOW 100
+#define PI 3.14
+
 /*
  * Main MLX handle, carries important data in regards to the program.
  * @param window The window itself.
@@ -49,9 +51,12 @@ typedef struct point
 	int		x1;
 	int		y1;
 	int		z1;
-	int		r;
-	int		g;
-	int		b;
+	int		rot_x;
+	int		rot_y;
+	int		rot_z;		
+	int		red;
+	int		green;
+	int		blue;
 	int		rgba;
 	char	*color;
 } t_point;
@@ -70,6 +75,7 @@ int		ft_set_win_and_img_sizes(t_sizes *size);
 void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size);
 void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size);
 void drawgl(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
+void apply_isometric_matrix(t_point *point);
 
 
 void	ft_error(void);
@@ -80,7 +86,7 @@ void draw_line_bresenham(mlx_image_t *image, t_point *start, t_point *end, uint3
 void draw_grid(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
 void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color);
 void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color);
-void test(mlx_image_t *img, t_point ****map, t_sizes *size);
+// void test(mlx_image_t *img, t_point ****map, t_sizes *size);
 void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color);
 void draw_vertical_lines(mlx_image_t *img, t_point ***map, t_sizes *size, uint32_t color);
 

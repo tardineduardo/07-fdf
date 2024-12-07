@@ -10,3 +10,16 @@
 
 
 
+//parallel
+
+//Add one more bonus of your choice
+// - reset positions
+// - control panel
+// - step by step changes
+// - direct glfw use
+
+
+
+
+--> Precalcular radianos
+--> Ajuste de sensibilidade do mouse
