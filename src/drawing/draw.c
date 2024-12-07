@@ -1,5 +1,8 @@
 #include "../fdf.h"
 
+
+
+
 void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color)
 {
     t_point *start;
@@ -15,10 +18,8 @@ void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, ui
         {
             start = point[y][x];
             end = point[y][x + 1];
-            draw_line_xiaolim(img, start, end, color);
-			//drawgl(img, start, end, color);
-			//draw_line_bresenham(img, start, end, color);
-            x++; // Increment x to avoid an infinite loop
+			drawgl(start, end);
+            x++;
         }
         y++;
     }

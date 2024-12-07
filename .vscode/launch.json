@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/fdf",
-			"args": ["/nfs/homes/eduribei/Documentos/repos/07-fdf/maps/plat.fdf"],
+			"args": ["/home/eduardo/Documentos/repos/07-fdf/maps/10-70.fdf"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],

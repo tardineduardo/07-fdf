@@ -44,13 +44,15 @@ int main(int argc, char *argv[])
 	if (!mlx)
 	   ft_error();
 
+    GLenum err = glewInit();
+
 	mlx_image_t *img = mlx_new_image(mlx, size.img_w, size.img_h);
 	if (!img)
 		ft_error();
 
 	ft_background(&size, img, 0xffff0000);
-//	ft_transform_map(&point, img, &size);
 
+	ft_fit_to_image(&point, img, &size);
 
 	ft_transform_map(&point, img, &size);
 	draw_horizontal_lines(img, point, &size, 0xffffffff);

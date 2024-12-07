@@ -10,6 +10,7 @@ MAIN =	src/fdf.c \
 		src/drawing/bresenham.c \
 		src/transform/map.c \
 		src/transform/point.c \
+		src/transform/fit.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
@@ -28,7 +29,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBMLX_PATH = ./libs/MLX42
 MLX_BUILD_PATH = $(LIBMLX_PATH)/build
 HEADERS = -I ./include -I $(LIBMLX_PATH)/include
-LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lGL -lGLU -lglfw -lGLEW
 
 all: libmlx $(NAME)
 

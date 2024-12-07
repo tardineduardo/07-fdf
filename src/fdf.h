@@ -1,12 +1,13 @@
 #include "../libs/libft/libft.h"
 #include "../libs/MLX42/include/MLX42/MLX42.h"
+#include "../libs/MLX42/include/glad/glad.h"
 
 #include <stdio.h>
 #include <unistd.h>
 #include <math.h>
 
 #define BPP sizeof(int32_t)
-#define PCT_OF_SCREEN 50
+#define PCT_OF_SCREEN 85
 #define PCT_OF_WINDOW 100
 #define PI 3.14
 
@@ -74,8 +75,9 @@ void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
 void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size);
 void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size);
-void drawgl(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
+void drawgl(t_point *start, t_point *end);
 void apply_isometric_matrix(t_point *point);
+void ft_fit_to_image(t_point ****map, mlx_image_t *img, t_sizes *size);
 
 
 void	ft_error(void);
@@ -84,7 +86,7 @@ void	ft_free_map(t_point ***parsed);
 
 void draw_line_bresenham(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
 void draw_grid(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
-void draw_line_xiaolim(mlx_image_t* image, t_point *start, t_point *end, uint32_t color);
+void draw_line_xiaolim(mlx_image_t* image, const t_point *start, const t_point *end, uint32_t color);
 void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color);
 // void test(mlx_image_t *img, t_point ****map, t_sizes *size);
 void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color);
