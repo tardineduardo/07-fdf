@@ -1,93 +1,74 @@
 #include "../fdf.h"
 
-#include <math.h>
 
-typedef struct
+
+
+void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color)
 {
-    int x0, y0, x1, y1; // Start and end coordinates for the line
-    uint32_t color;     // Color for the line
-} t_line;
+    t_point *start;
+    t_point *end;
+    int x;
+    int y;
 
-// Function to draw a line using Bresenham's algorithm
-void draw_line(mlx_image_t *image, t_line *line)
-{
-    int dx = abs(line->x1 - line->x0);
-    int dy = abs(line->y1 - line->y0);
-
-    int sx, sy;
-    if (line->x0 < line->x1)
-        sx = 1;
-    else
-        sx = -1;
-
-    if (line->y0 < line->y1)
-        sy = 1;
-    else
-        sy = -1;
-
-    int err = dx - dy;
-
-    int x = line->x0;
-    int y = line->y0;
-
-    while (1)
+    y = 0;
+    while (y < size->map_h)
     {
-        // Put a pixel at (x, y)
-        mlx_put_pixel(image, x, y, line->color);
-
-        // If we have reached the end point, break
-        if (x == line->x1 && y == line->y1)
-            break;
-
-        // Update error and coordinates
-        int e2 = 2 * err;
-        if (e2 > -dy)
+        x = 0;
+        while (x < size->map_w - 1) // Prevent out-of-bounds access
         {
-            err -= dy;
-            x += sx;
+            start = point[y][x];
+            end = point[y][x + 1];
+			drawgl(start, end);
+            x++;
         }
-        if (e2 < dx)
-        {
-            err += dx;
-            y += sy;
-        }
+        y++;
     }
 }
 
-// Function to draw a grid based on t_map
-void draw_grid(mlx_image_t *image, t_map ***matrix, t_sizes *sizes, uint32_t color)
+void draw_vertical_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color)
 {
-    t_line line;
+    t_point *start;
+    t_point *end;
+    int x;
+    int y;
 
-    for (int y = 0; y < sizes->img_h; y++)
+    x = 0;
+    while (x < size->map_w)  // Switch to columns first
     {
-        for (int x = 0; x < sizes->img_w; x++)
+        y = 0;
+        while (y < size->map_h - 1)  // Prevent out-of-bounds access
         {
-            // Calculate screen positions
-            int screen_x0 = x * (sizes->win_w / sizes->img_w);
-            int screen_y0 = y * (sizes->win_h / sizes->img_h);
+            start = point[y][x];       // Current point
+            end = point[y + 1][x];     // Point below
+            draw_line_xiaolim(img, start, end, color);
+			//drawgl(img, start, end, color);
+			//draw_line_bresenham(img, start, end, color);
 
-            // Horizontal line: Connect (x, y) to (x+1, y)
-            if (x + 1 < sizes->img_w)
-            {
-                line.x0 = screen_x0;
-                line.y0 = screen_y0;
-                line.x1 = (x + 1) * (sizes->win_w / sizes->img_w);
-                line.y1 = screen_y0;
-                line.color = color;
-                draw_line(image, &line);
-            }
 
-            // Vertical line: Connect (x, y) to (x, y+1)
-            if (y + 1 < sizes->img_h)
-            {
-                line.x0 = screen_x0;
-                line.y0 = screen_y0;
-                line.x1 = screen_x0;
-                line.y1 = (y + 1) * (sizes->win_h / sizes->img_h);
-                line.color = color;
-                draw_line(image, &line);
-            }
+            y++;  // Move down the column
         }
+        x++;  // Next column
     }
+}
+
+
+
+
+
+void test(mlx_image_t *img, t_point ****map, t_sizes *size)
+{
+	int	a;
+	int	b;
+
+	a = 0;
+	while (a < size->map_h)
+	{
+		b = 0;
+		while(b < size->map_w)
+		{
+			mlx_put_pixel(img, (*map)[a][b]->x0, (*map)[a][b]->y0, 0xffffffff);
+			b++;
+		}
+		a++;
+	}
 }

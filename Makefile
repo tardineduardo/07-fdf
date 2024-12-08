@@ -2,11 +2,15 @@ MAIN =	src/fdf.c \
 		src/parsing/parse.c \
 		src/utils/utils.c \
 		src/screen/get_monitor_resolution.c \
-		src/transform/transform_map.c \
 		src/debug/ft_debug_print_2D_struct.c \
 		src/screen/set_sizes.c \
 		src/drawing/draw.c \
-
+		src/colors/colors.c \
+		src/drawing/xiaolim.c \
+		src/drawing/bresenham.c \
+		src/transform/map.c \
+		src/transform/point.c \
+		src/transform/fit.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
@@ -25,7 +29,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBMLX_PATH = ./libs/MLX42
 MLX_BUILD_PATH = $(LIBMLX_PATH)/build
 HEADERS = -I ./include -I $(LIBMLX_PATH)/include
-LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lGL -lGLU -lglfw -lGLEW
 
 all: libmlx $(NAME)
 
