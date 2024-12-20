@@ -24,16 +24,15 @@ bool	ft_free_and_true(void *ptr)
 	return (true);
 }
 
-void *ft_free_and_null(void *ptr)
+void	*ft_free_and_null(void *ptr)
 {
 	free(ptr);
 	return (NULL);
 }
 
-void *ft_free_and_exit(void *ptr, char *msg, int errnum)
+void	*ft_free_and_exit(void *ptr, char *msg, int errnum)
 {
 	free(ptr);
 	ft_dprintf(STDERR_FILENO, msg);
 	exit(errnum);
 }
-

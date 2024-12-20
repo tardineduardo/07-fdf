@@ -54,7 +54,6 @@ char	*ft_strtok_r(char *input_str, char *delimiters, char **saveptr)
 		*saveptr = ft_skip_delimiters(input_str, delimiters);
 	else
 		*saveptr = ft_skip_delimiters(*saveptr, delimiters);
-
 	current_token = *saveptr;
 	*saveptr = ft_mark_token_end(current_token, delimiters);
 	return (current_token);

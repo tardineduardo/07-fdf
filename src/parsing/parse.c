@@ -1,74 +1,60 @@
+/* ************************************************************************** */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   parse.c											:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: eduribei <eduribei@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2024/12/09 04:37:24 by eduribei		  #+#	#+#			 */
+/*   Updated: 2024/12/10 04:42:51 by eduribei		 ###   ########.fr	   */
+/*																			*/
+/* ************************************************************************** */
+
 #include "../fdf.h"
 
-static void	ft_fill_point_struct(char *point, t_point *map, t_file *fdf)
+static void	ft_fill_point(char *pointstr, t_point *point)
 {
 	char	*charcolor;
-	char	*data;
 	char	*save_data;
 
-	map->z0 = ft_atoi(ft_strtok_r(point, " ", &save_data)); 
-	charcolor = ft_strtok_r(NULL, " ", &save_data);
+	point->z_map = ft_atoi(ft_strtok_r(pointstr, ",", &save_data));
+	charcolor = ft_strtok_r(NULL, ",", &save_data);
 	if (charcolor)
-	{
-		map->rgba = (int)ft_atohx(charcolor);
-		// map->r = ft_get_r(map->rgba);
-		// map->g = ft_get_g(map->rgba);
-		// map->b = ft_get_b(map->rgba);
-		// map->b = ft_get_a(map->rgba);
-
-	}
-	return ;
+		point->rgba = (int)ft_atohx(charcolor);
+	else
+		point->rgba = 0xFFFFFFFF;
+	point->r = ft_get_r(point->rgba);
+	point->g = ft_get_g(point->rgba);
+	point->b = ft_get_b(point->rgba);
+	point->a = ft_get_a(point->rgba);
 }
 
-static void	ft_fill_matrix(char *str, t_point ****map, t_file *fdf)
+static void	ft_fill_array(char *content, t_point *point, t_file *fdf)
 {
-	int		a;
-	int		b;
-	char	*line;
-	char	*point;
+	int		line;
+	int		col;
+	int		i;
+	char	*linestr;
+	char	*pointstr;
 
-	a = 0;
-	line = ft_strtok_r(str, "\n", &fdf->save_line);
-	while (line != NULL)
+	line = 0;
+	linestr = ft_strtok_r(content, "\n", &fdf->save_line);
+	while (line < fdf->lines && linestr != NULL)
 	{
-		b = 0;
-		point = ft_strtok_r(line, " ", &fdf->save_point);
-		while (point != NULL)
+		col = 0;
+		pointstr = ft_strtok_r(linestr, " ", &fdf->save_point);
+		while (col < fdf->cols && pointstr != NULL)
 		{
-			ft_fill_point_struct(point, (*map)[a][b], fdf);
-			(*map)[a][b]->x0 = b;
-			(*map)[a][b]->y0 = a;
-			point = ft_strtok_r(NULL, " ", &fdf->save_point);
-			b++;
+			i = line * fdf->cols + col;
+			point[i].x_map = col;
+			point[i].y_map = line;
+			ft_fill_point(pointstr, &point[i]);
+			pointstr = ft_strtok_r(NULL, " ", &fdf->save_point);
+			col++;
 		}
-		line = ft_strtok_r(NULL, "\n", &fdf->save_line);
-		a++;
+		linestr = ft_strtok_r(NULL, "\n", &fdf->save_line);
+		line++;
 	}
-}
-
-static void	ft_allocate_matrix(t_point ****point, t_file *fdf)
-{
-	int	a;
-	int	b;
-
-	
-	*point = ft_calloc(fdf->lines + 1, sizeof(t_point**));
-	//error check
-	a = 0;
-	while (a < fdf->lines)
-	{
-		(*point)[a] = ft_calloc(fdf->cols + 1, sizeof(t_point*));
-		//error check
-		b = 0;
-		while (b < fdf->cols)
-		{
-			(*point)[a][b] = ft_calloc(1, sizeof(t_point));
-			//error check
-			b++;
-		}
-		a++;
-	}
-	return ;
 }
 
 /* Counts lines and colums; trimm empty lines and validate width. */
@@ -81,7 +67,6 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 
 	ft_init_count(str, fdf, &col_check);
 	copy = ft_strdup(str);
-	// error_ckeck
 	line = ft_strtok_r(copy, "\n", &fdf->save_line);
 	while (line != NULL)
 	{
@@ -95,28 +80,33 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 		if (fdf->cols != col_check)
 			ft_error_free_and_exit(copy, "Irregular width.\n", EXIT_FAILURE);
 		fdf->lines++;
-		line = strtok_r(NULL, "\n", &fdf->save_line);
+		line = ft_strtok_r(NULL, "\n", &fdf->save_line);
 	}
 	free(copy);
 	return ;
 }
 
-t_point ***ft_parse(char *filename, t_sizes	*size)
+t_point	*ft_parse(char *filename, t_map **map)
 {
-	t_point   ***point;
-	t_file  fdf;
+	t_point	*point;
+	t_file	fdf;
 	char	*content;
 
+	*map = ft_calloc(1, sizeof(t_map));
+	if (!map)
+		ft_print_error_and_exit("Malloc error.\n", EXIT_FAILURE);
 	content = ft_fn_to_str(filename);
 	if (!content)
-		return (NULL);
+	{
+		free(*map);
+		exit(EXIT_FAILURE);
+	}
 	ft_count_trimm_and_validate(content, &fdf);
-	ft_allocate_matrix(&point, &fdf);
-	if (!point)
-		return (NULL);
-	ft_fill_matrix(content, &point, &fdf);
-	size->map_w = fdf.cols;
-	size->map_h = fdf.lines;	
+	point = ft_calloc(fdf.lines * fdf.cols, sizeof(t_point));
+	ft_fill_array(content, point, &fdf);
+	(*map)->map_w = fdf.cols;
+	(*map)->map_h = fdf.lines;
+	ft_find_max_min_height(point, map);
 	free(content);
 	return (point);
 }

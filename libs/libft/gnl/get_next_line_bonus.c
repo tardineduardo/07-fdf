@@ -60,7 +60,7 @@ char	*get_next_line(int fd)
 	if (read(fd, 0, 0) == -1 || GNLBUFF <= 0)
 		return (NULL);
 	if (!remainder[fd])
-		remainder[fd] = calloc(GNLBUFF, 1); // use a minha calloc
+		remainder[fd] = ft_calloc(GNLBUFF, 1);
 	nextline = ft_strdup(remainder[fd]);
 	remainder[fd][0] = 0;
 	if (!nextline)

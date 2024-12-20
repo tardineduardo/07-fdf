@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:41:51 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 04:41:54 by eduribei         ###   ########.fr       */
+/*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/14 17:42:57 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	ft_get_rgba(int r, int g, int b, int a)
+void	ft_key_hooks(mlx_key_data_t keydata, void *param)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+	mlx_t	*mlx;
 
-int	ft_get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	ft_get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	ft_get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	ft_get_a(int rgba)
-{
-	return (rgba & 0xFF);
+	mlx = (mlx_t *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(mlx);
 }

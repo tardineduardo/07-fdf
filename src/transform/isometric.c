@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:41:51 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 04:41:54 by eduribei         ###   ########.fr       */
+/*   Created: 2024/12/08 19:29:50 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/09 18:20:09 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	ft_get_rgba(int r, int g, int b, int a)
+void	ft_convert_to_isometric(t_point *p, t_map *m, mlx_image_t *i)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int	ft_get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	ft_get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	ft_get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	ft_get_a(int rgba)
-{
-	return (rgba & 0xFF);
+	(void)i;
+	(void)m;
+	(*p).x_scr = ((*p).x_wld - (*p).y_wld) * cos(30 * PI / 180);
+	(*p).y_scr = ((*p).x_wld + (*p).y_wld) * sin(30 * PI / 180) - (*p).z_wld;
 }

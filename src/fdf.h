@@ -1,118 +1,141 @@
-#include "../libs/libft/libft.h"
-#include "../libs/MLX42/include/MLX42/MLX42.h"
-#include "../libs/MLX42/include/glad/glad.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 21:20:33 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/16 14:04:53 by eduribei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <math.h>
+#ifndef FDF_H
+# define FDF_H
 
-#define BPP sizeof(int32_t)
-#define PCT_OF_SCREEN 85
-#define PCT_OF_WINDOW 100
-#define PI 3.14
+# include <math.h>
+# include "../libs/libft/libft.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
+# define PCT_OF_SCREEN 75
+# define PCT_OF_WINDOW 100
+# define PI 3.141592653589793
+# define DBL_MAX 1.7976931348623157e+308
+# define DBL_MIN 2.2250738585072014e-308
 
-/*
- * Main MLX handle, carries important data in regards to the program.
- * @param window The window itself.
- * @param context Abstracted opengl data.
- * @param width The width of the window.
- * @param height The height of the window.
- * @param delta_time The time difference between the previous frame and the current frame.
- */
-
-
-// typedef struct mlx_image
-// {
-// 	const uint32_t	width;
-// 	const uint32_t	height;
-// 	uint8_t*		pixels;
-// 	mlx_instance_t*	instances;
-// 	size_t			count;
-// 	bool			enabled;
-// 	void*			context;
-// }	mlx_image_t;
-
-typedef struct sizes
+typedef struct s_sizes
 {
-    int32_t	scr_w;
-    int32_t	scr_h;
-    int32_t	win_w;
-    int32_t	win_h;
-    int32_t	img_w;
-    int32_t	img_h;
-    int32_t	map_w;
-    int32_t	map_h;	
+	int32_t	scr_w;
+	int32_t	scr_h;
+	int32_t	win_w;
+	int32_t	win_h;
+	int32_t	img_w;
+	int32_t	img_h;
 }	t_sizes;
 
-typedef struct point
+typedef struct s_map
 {
-	int		x0;
-	int		y0;
-	int		z0;
-	int		x1;
-	int		y1;
-	int		z1;
+	int		map_w;
+	int		map_h;
 	int		rot_x;
 	int		rot_y;
-	int		rot_z;		
-	int		red;
-	int		green;
-	int		blue;
-	int		rgba;
-	char	*color;
-} t_point;
+	int		rot_z;
+	int		minz;
+	int		maxz;
+	double	x_scr_var;
+	double	y_scr_var;
+	double	max_x_scr;
+	double	max_y_scr;
+	double	min_x_scr;
+	double	min_y_scr;
+	double	height_scale;
+}	t_map;
 
-typedef struct file
+typedef struct s_line
 {
-	size_t	lines;
-	size_t	cols;
+	double	x;
+	double	y;
+	double	delta_x;
+	double	delta_y;
+	double	x_inc;
+	double	y_inc;
+	int		steps;
+	int		i;
+}	t_line;
+
+typedef struct s_point
+{
+	int			x_map;
+	int			y_map;
+	int			z_map;
+	double		x_wld;
+	double		y_wld;
+	double		z_wld;
+	int			x_scr;
+	int			y_scr;
+	int			r;
+	int			g;
+	int			b;
+	int			a;
+	uint32_t	rgba;
+	char		*color;
+}	t_point;
+
+typedef struct s_file
+{
+	int		lines;
+	int		cols;
 	char	*save_line;
 	char	*save_point;
-} t_file;
+}	t_file;
 
-//USING
+typedef void	(*t_ft)(t_point*, t_map*, mlx_image_t*);
+
+//USING ------------------------------------------------------------------------
+
+void	ft_find_max_min_height(t_point *point, t_map **map);
+void	ft_find_y_boundaries(t_point **point, t_map *map);
+void	ft_find_x_boundaries(t_point **point, t_map *map);
+
+//INITS
+void	ft_inits(mlx_t **mlx, mlx_image_t **img, t_sizes **size, t_map **map);
 void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
-void ft_transform_map(t_point ****map, mlx_image_t *img, t_sizes *size);
-void ft_transform_map_iso(t_point ****map, mlx_image_t *img, t_sizes *size);
-void drawgl(t_point *start, t_point *end);
-void apply_isometric_matrix(t_point *point);
-void ft_fit_to_image(t_point ****map, mlx_image_t *img, t_sizes *size);
 
-
-void	ft_error(void);
-t_point	***ft_parse(char *filename,	t_sizes *size);
-void	ft_free_map(t_point ***parsed);
-
-void draw_line_bresenham(mlx_image_t *image, t_point *start, t_point *end, uint32_t color);
-void draw_grid(mlx_image_t *img, t_point ***point, t_sizes *sizes, uint32_t color);
-void draw_line_xiaolim(mlx_image_t* image, const t_point *start, const t_point *end, uint32_t color);
-void draw_line_xiaolim2(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t color);
-// void test(mlx_image_t *img, t_point ****map, t_sizes *size);
-void draw_horizontal_lines(mlx_image_t *img, t_point ***point, t_sizes *size, uint32_t color);
-void draw_vertical_lines(mlx_image_t *img, t_point ***map, t_sizes *size, uint32_t color);
-
-
+//DRAW
+void	ft_update_points(t_point *p, mlx_image_t *img, t_map *map, t_ft func);
+void	ft_draw_isometric_map(t_point *point, t_map *m, mlx_image_t *img);
+void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
+void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);
+void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
+void	ft_draw_solid_background(mlx_image_t *img, int color);
 
 //COLORS
-int ft_get_rgba(int r, int ft_g, int b, int a);
-int ft_get_r(int rgba);
-int ft_get_g(int rgba);
-int ft_get_b(int rgba);
-int ft_get_a(int rgba);
+int		ft_get_rgba(int r, int ft_g, int b, int a);
+int		ft_get_r(int rgba);
+int		ft_get_g(int rgba);
+int		ft_get_b(int rgba);
+int		ft_get_a(int rgba);
 
-//INUTILS
-void	ft_init_count(char *str, t_file *fdf, int *col_check);
+//MOVES
+void	ft_x_rot(t_point *point, t_map *map, mlx_image_t *i);
+void	ft_y_rot(t_point *point, t_map *map, mlx_image_t *i);
+void	ft_z_rot(t_point *point, t_map *map, mlx_image_t *i);
+void	ft_translate(t_point *point, t_map *map, mlx_image_t *img);
+void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img);
+void	ft_convert_to_isometric(t_point *point, t_map *map, mlx_image_t *img);
+
+//PARSING
+t_point	*ft_parse(char *filename, t_map **map);
 int		ft_columns_in_first_line(char *s);
+void	ft_init_count(char *str, t_file *fdf, int *col_check);
+
+//ERROR
+void	ft_error(void);
 
 //DEBUG
-void	ft_debug_print_2D_struct(t_point ****map);
+void	ft_put_points(t_point *p, t_map *m);
 
-//NOT USING
-//GLFWmonitor* ft_get_active_monitor(void);
-//void draw_line(int x1, int y1, int x2, int y2, void *mlx, void *win);
+//HOOKS
+void	ft_key_hooks(mlx_key_data_t keydata, void *param);
 
-
-
-
-
+#endif

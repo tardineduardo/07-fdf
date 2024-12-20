@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   greatest.c                                         :+:      :+:    :+:   */
+/*   ft_greatest.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-int greatest(int a, int b)
+int	ft_greatest(int a, int b)
 {
 	if (a > b)
 		return (a);

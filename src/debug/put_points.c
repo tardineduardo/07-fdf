@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   put_points.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:41:51 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 04:41:54 by eduribei         ###   ########.fr       */
+/*   Created: 2024/12/08 21:58:35 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/10 05:42:14 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	ft_get_rgba(int r, int g, int b, int a)
+void	ft_put_points(t_point *p, t_map *m)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+	int	i;
+	int	max;
 
-int	ft_get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	ft_get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	ft_get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	ft_get_a(int rgba)
-{
-	return (rgba & 0xFF);
+	max = (*m).map_w * (*m).map_h;
+	i = 0;
+	while (i < max)
+	{
+		printf("xm = %i, ym = %i, zm = %i\t|\t",
+			p[i].x_map, p[i].y_map, p[i].z_map);
+		printf("xw = %.2f, yw = %.2f, zw = %.2f\t|\t",
+			p[i].x_wld, p[i].y_wld, p[i].z_wld);
+		printf("xs = %i, ys = %i\n", p[i].x_scr, p[i].y_scr);
+		i++;
+	}
 }

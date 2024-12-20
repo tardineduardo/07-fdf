@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_all_lines_fn.c                            :+:      :+:    :+:   */
+/*   draw_solid_background.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/14 17:43:24 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:43:57 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../fdf.h"
 
-int	ft_count_all_lines_fn(char *filename)
+void	ft_draw_solid_background(mlx_image_t *img, int color)
 {
-	int		file;
-	char	*line;
-	int		count_lines;
+	uint32_t	i;
+	uint32_t	j;
 
-	file = open(filename, O_RDONLY);
-	if (file == -1)
-		return (-1);
-	count_lines = 0;
-	while (1)
+	i = 0;
+	while (i < img->height)
 	{
-		line = get_next_line(file);
-		if (!line)
-			break ;
-		count_lines += ft_count_char(line, '\n');
-		free(line);
+		j = 0;
+		while (j < img->width)
+		{
+			mlx_put_pixel(img, j, i, color);
+			j++;
+		}
+		++i;
 	}
-	close(file);
-	return (count_lines);
 }
-/*
-I need to change my GNL so it also returns me a flag if newline = NULL,
-but the loop didn't reach EOF (indicating malloc error or read error).
-In these cases, countlines should also raise an issue (ex: return -1).
-*/

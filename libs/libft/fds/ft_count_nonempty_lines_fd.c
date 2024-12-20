@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_count_nonempty_lines_fd.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/14 17:43:34 by eduribei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 /* fd remains reusable because lseek() restores the file offset. */
@@ -15,7 +27,7 @@ int	ft_count_nonempty_lines_fd(int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		if (ft_is_line_empty(line))
 		{
 			free(line);

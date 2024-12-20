@@ -2,22 +2,27 @@ MAIN =	src/fdf.c \
 		src/parsing/parse.c \
 		src/utils/utils.c \
 		src/screen/get_monitor_resolution.c \
-		src/debug/ft_debug_print_2D_struct.c \
 		src/screen/set_sizes.c \
-		src/drawing/draw.c \
 		src/colors/colors.c \
-		src/drawing/xiaolim.c \
-		src/drawing/bresenham.c \
-		src/transform/map.c \
 		src/transform/point.c \
 		src/transform/fit.c \
+		src/transform/isometric.c \
+		src/debug/put_points.c \
+		src/transform/translate.c \
+		src/transform/minimax_z.c \
+		src/transform/bounds.c \
+		src/drawing/draw_line.c \
+		src/drawing/draw_grid.c \
+		src/drawing/draw_iso_map.c \
+		src/utils/inits.c \
+		src/drawing/draw_solid_background.c \
+		src/hooks/keys.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
 CC = cc
 RM = rm -f
-#CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -g -DDEBUG=1
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = fdf
 
@@ -29,8 +34,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBMLX_PATH = ./libs/MLX42
 MLX_BUILD_PATH = $(LIBMLX_PATH)/build
 HEADERS = -I ./include -I $(LIBMLX_PATH)/include
-LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lGL -lGLU -lglfw -lGLEW
-
+LIBS = $(LIBMLX_PATH)/build/libmlx42.a -ldl -lglfw -pthread -lm -lGL
 all: libmlx $(NAME)
 
 $(NAME): $(OBJS_SRC) $(LIBFT)

@@ -34,6 +34,5 @@ void	ft_sort_int_array_bubble(int *array, size_t len)
 			}
 			i++;
 		}
-	}	
+	}
 }
-

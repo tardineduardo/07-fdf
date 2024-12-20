@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:41:51 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 04:41:54 by eduribei         ###   ########.fr       */
+/*   Created: 2024/12/08 20:01:26 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/09 02:46:41 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	ft_get_rgba(int r, int g, int b, int a)
+void	ft_translate(t_point *point, t_map *map, mlx_image_t *img)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int	ft_get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	ft_get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	ft_get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	ft_get_a(int rgba)
-{
-	return (rgba & 0xFF);
+	(void)img;
+	(*point).x_scr += map->x_scr_var;
+	(*point).y_scr += map->y_scr_var;
 }

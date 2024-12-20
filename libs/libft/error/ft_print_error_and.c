@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_error_and_exit.c                                    :+:      :+:    :+:   */
+/*   ft_print_error_and.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -42,7 +42,7 @@ bool	ft_print_error_and_true(char *message)
 }
 
 /* This function only exists to comply with 42's 25-line-per-function limit. */
-void *ft_print_error_and_null(char *message)
+void	*ft_print_error_and_null(char *message)
 {
 	ft_putstr_fd(message, STDERR_FILENO);
 	return (NULL);

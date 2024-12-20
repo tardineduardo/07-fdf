@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   minimax_z.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:41:51 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 04:41:54 by eduribei         ###   ########.fr       */
+/*   Created: 2024/12/09 23:49:02 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/10 05:15:39 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	ft_get_rgba(int r, int g, int b, int a)
+void	ft_find_max_min_height(t_point *point, t_map **map)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
+	int	i;
+	int	total_size;
 
-int	ft_get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	ft_get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	ft_get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
-
-int	ft_get_a(int rgba)
-{
-	return (rgba & 0xFF);
+	total_size = (*map)->map_w * (*map)->map_h;
+	(*map)->minz = INT_MAX;
+	(*map)->maxz = INT_MIN;
+	i = 0;
+	while (i < total_size)
+	{
+		if (point[i].z_map < (*map)->minz)
+			(*map)->minz = point[i].z_map;
+		if (point[i].z_map > (*map)->maxz)
+			(*map)->maxz = point[i].z_map;
+		i++;
+	}
+	return ;
 }

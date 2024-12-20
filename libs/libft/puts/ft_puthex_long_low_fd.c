@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-int	ft_puthex_lo_long_fd(unsigned long long int n, int fd)
+int	ft_puthex_lo_long_fd(t_llong n, int fd)
 {
 	int		count;
 	char	hex_str[17];

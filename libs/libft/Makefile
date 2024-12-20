@@ -21,11 +21,6 @@ CONV =	conv/ft_atoi.c \
 CALC = 	calc/ft_lowest.c \
 		calc/ft_greatest.c \
 
-DEBUG =	debug/ft_debug_print_array_of_strings.c \
-		debug/ft_debug_print_array_of_ints.c \
-		debug/ft_debug_print_list.c \
-		debug/ft_debug_print_dclist.c \
-
 ERROR =	error/ft_print_error_and.c \
 		error/ft_perror_exit.c \
 		error/ft_perror_func_exit.c	\
@@ -42,46 +37,9 @@ FDS =	fds/ft_close_four.c \
 		fds/ft_count_nonempty_lines_fd.c \
 		fds/ft_count_nonempty_lines_fn.c \
 
-SLISTS =	lists/slist/ft_lstadd_back.c \
-			lists/slist/ft_lstadd_front.c \
-			lists/slist/ft_lstclear.c \
-			lists/slist/ft_lstclear_err_exit.c \
-			lists/slist/ft_lstclear_null.c \
-			lists/slist/ft_lstdelone.c \
-			lists/slist/ft_lstiter.c \
-			lists/slist/ft_lstlast.c \
-			lists/slist/ft_lstmap.c \
-			lists/slist/ft_lstnew.c \
-			lists/slist/ft_lstsize.c \
-
-CLISTS =	lists/clist/ft_clistsize.c \
-			lists/clist/ft_clstadd_back.c \
-			lists/clist/ft_clstadd_front.c \
-			lists/clist/ft_clstadd_mid.c \
-			lists/clist/ft_clstnew.c \
-
-DCLISTS =	lists/dclst/ft_dclistsize.c \
-			lists/dclst/ft_dclstadd_back.c \
-			lists/dclst/ft_dclstnew.c \
-			lists/dclst/ft_dclst_find_lowest_int.c \
-			lists/dclst/ft_dclst_find_highest_int.c \
-			lists/dclst/ft_dclst_find_value.c \
-			lists/dclst/ft_dclst_dist_head_bidi_len.c \
-			lists/dclst/ft_dclst_dist_head_bidi.c \
-			lists/dclst/ft_dclst_clock_sortd.c \
-			lists/dclst/ft_dclst_circle_sorted.c \
-			lists/dclst/ft_dclst_list_sorted.c \
-			lists/dclst/ft_dclstclear_simple.c \
-
 MEM = 	mem/ft_bzero.c \
 		mem/ft_calloc.c \
-		mem/ft_free.c \
-		mem/ft_free_str_array.c \
-		mem/ft_memchr.c \
-		mem/ft_memcmp.c \
 		mem/ft_memcpy.c \
-		mem/ft_memmove.c \
-		mem/ft_memset.c \
 		mem/ft_free_and.c \
 
 STRING = string/ft_concatenate.c \
@@ -123,7 +81,6 @@ GNL	=	gnl/get_next_line_bonus.c
 OBJS =	$(PRINT:.c=.o) \
 		$(CONV:.c=.o) \
 		$(CALC:.c=.o) \
-		$(DEBUG:.c=.o) \
 		$(ERROR:.c=.o) \
 		$(FDS:.c=.o) \
 		$(MEM:.c=.o) \
@@ -138,7 +95,7 @@ CC = cc
 
 RM = rm -f
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
