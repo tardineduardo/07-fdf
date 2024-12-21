@@ -9,14 +9,14 @@ MAIN =	src/fdf.c \
 		src/transform/isometric.c \
 		src/debug/put_points.c \
 		src/transform/translate.c \
-		src/transform/minimax_z.c \
 		src/transform/bounds.c \
 		src/drawing/draw_line.c \
 		src/drawing/draw_grid.c \
-		src/drawing/draw_iso_map.c \
+		src/drawing/launch_iso_map.c \
 		src/utils/inits.c \
 		src/drawing/draw_solid_background.c \
 		src/hooks/keys.c \
+		src/utils/min_max_z.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 

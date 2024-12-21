@@ -32,36 +32,6 @@ typedef struct s_sizes
 	int32_t	img_h;
 }	t_sizes;
 
-typedef struct s_map
-{
-	int		map_w;
-	int		map_h;
-	int		rot_x;
-	int		rot_y;
-	int		rot_z;
-	int		minz;
-	int		maxz;
-	double	x_scr_var;
-	double	y_scr_var;
-	double	max_x_scr;
-	double	max_y_scr;
-	double	min_x_scr;
-	double	min_y_scr;
-	double	height_scale;
-}	t_map;
-
-typedef struct s_line
-{
-	double	x;
-	double	y;
-	double	delta_x;
-	double	delta_y;
-	double	x_inc;
-	double	y_inc;
-	int		steps;
-	int		i;
-}	t_line;
-
 typedef struct s_point
 {
 	int			x_map;
@@ -80,6 +50,50 @@ typedef struct s_point
 	char		*color;
 }	t_point;
 
+typedef struct s_map
+{
+	int			map_w;
+	int			map_h;
+	double		rot_x;
+	double		rot_y;
+	double		rot_z;
+	int			minz;
+	int			maxz;
+	double		x_scr_var;
+	double		y_scr_var;
+	double		max_x_scr;
+	double		max_y_scr;
+	double		min_x_scr;
+	double		min_y_scr;
+	double		height_scale;
+	char		*order;
+	t_point 	*points;
+	mlx_image_t *img;
+}	t_map;
+
+typedef struct s_line
+{
+	double	x;
+	double	y;
+	double	delta_x;
+	double	delta_y;
+	double	x_inc;
+	double	y_inc;
+	int		steps;
+	int		i;
+}	t_line;
+
+typedef struct s_camera
+{
+    double x;       // Camera position in world space
+    double y;
+    double z;
+    double rot_x;   // Camera orientation (pitch)
+    double rot_y;   // Camera orientation (yaw)
+    double rot_z;   // Camera orientation (roll)
+    double fov;     // Field of view for perspective projection
+} t_camera;
+
 typedef struct s_file
 {
 	int		lines;
@@ -88,22 +102,31 @@ typedef struct s_file
 	char	*save_point;
 }	t_file;
 
+typedef struct s_hook_param
+{
+	t_point		*points;
+	t_map		*map;
+	t_sizes		*sizes;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}	t_hook_param;
+
 typedef void	(*t_ft)(t_point*, t_map*, mlx_image_t*);
 
 //USING ------------------------------------------------------------------------
 
-void	ft_find_max_min_height(t_point *point, t_map **map);
+void	ft_min_max_z(t_map **map);
 void	ft_find_y_boundaries(t_point **point, t_map *map);
 void	ft_find_x_boundaries(t_point **point, t_map *map);
 
 //INITS
-void	ft_inits(mlx_t **mlx, mlx_image_t **img, t_sizes **size, t_map **map);
+void	ft_inits(mlx_t **mlx, t_sizes **size, t_map **map);
 void	ft_get_monitor_resolution(t_sizes *size);
 int		ft_set_win_and_img_sizes(t_sizes *size);
 
 //DRAW
 void	ft_update_points(t_point *p, mlx_image_t *img, t_map *map, t_ft func);
-void	ft_draw_isometric_map(t_point *point, t_map *m, mlx_image_t *img);
+void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
 void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
 void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);
 void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
@@ -125,7 +148,7 @@ void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_convert_to_isometric(t_point *point, t_map *map, mlx_image_t *img);
 
 //PARSING
-t_point	*ft_parse(char *filename, t_map **map);
+void	ft_parse(char *filename, t_map **map);
 int		ft_columns_in_first_line(char *s);
 void	ft_init_count(char *str, t_file *fdf, int *col_check);
 

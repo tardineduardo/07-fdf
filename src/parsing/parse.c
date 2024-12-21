@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   parse.c											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: eduribei <eduribei@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/12/09 04:37:24 by eduribei		  #+#	#+#			 */
-/*   Updated: 2024/12/10 04:42:51 by eduribei		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 04:37:24 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/15 16:36:34 by eduribei         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
@@ -67,6 +67,7 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 
 	ft_init_count(str, fdf, &col_check);
 	copy = ft_strdup(str);
+	// error_ckeck
 	line = ft_strtok_r(copy, "\n", &fdf->save_line);
 	while (line != NULL)
 	{
@@ -86,9 +87,8 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 	return ;
 }
 
-t_point	*ft_parse(char *filename, t_map **map)
+void	ft_parse(char *filename, t_map **map)
 {
-	t_point	*point;
 	t_file	fdf;
 	char	*content;
 
@@ -102,11 +102,10 @@ t_point	*ft_parse(char *filename, t_map **map)
 		exit(EXIT_FAILURE);
 	}
 	ft_count_trimm_and_validate(content, &fdf);
-	point = ft_calloc(fdf.lines * fdf.cols, sizeof(t_point));
-	ft_fill_array(content, point, &fdf);
+	(*map)->points = ft_calloc(fdf.lines * fdf.cols, sizeof(t_point));
+	ft_fill_array(content, (*map)->points, &fdf);
 	(*map)->map_w = fdf.cols;
 	(*map)->map_h = fdf.lines;
-	ft_find_max_min_height(point, map);
+	ft_min_max_z(map);
 	free(content);
-	return (point);
 }

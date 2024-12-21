@@ -12,7 +12,7 @@
 
 #include "../fdf.h"
 
-void	ft_draw_isometric_map(t_point *point, t_map *m, mlx_image_t *img)
+void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx)
 {
 	ft_update_points(point, img, m, &ft_fit_to_image);
 	m->rot_z = 270;
@@ -23,7 +23,29 @@ void	ft_draw_isometric_map(t_point *point, t_map *m, mlx_image_t *img)
 	m->x_scr_var = (img->width / 2.0) - ((m->max_x_scr + m->min_x_scr) / 2.0);
 	m->y_scr_var = (img->height / 2.0) - ((m->max_y_scr + m->min_y_scr) / 2.0);
 	ft_update_points(point, NULL, m, &ft_translate);
+	ft_draw_solid_background(m->img, 0x000000DD);
 	draw_vlines(img, point, m);
 	draw_hlines(img, point, m);
+	mlx_image_to_window((*mlx), m->img, 0, 0);
+	return ;
+}
+
+
+void	ft_redraw(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx)
+{
+	ft_update_points(point, img, m, &ft_fit_to_image);
+	ft_update_points(point, img, m, &ft_x_rot);
+	ft_update_points(point, img, m, &ft_y_rot);
+	ft_update_points(point, img, m, &ft_z_rot);	
+	ft_update_points(point, img, m, &ft_convert_to_isometric);
+	ft_find_x_boundaries(&point, m);
+	ft_find_y_boundaries(&point, m);
+	m->x_scr_var = (img->width / 2.0) - ((m->max_x_scr + m->min_x_scr) / 2.0);
+	m->y_scr_var = (img->height / 2.0) - ((m->max_y_scr + m->min_y_scr) / 2.0);
+	ft_update_points(point, NULL, m, &ft_translate);
+	ft_draw_solid_background(m->img, 0x000000DD);
+	draw_vlines(img, point, m);
+	draw_hlines(img, point, m);
+	mlx_image_to_window((*mlx), m->img, 0, 0);
 	return ;
 }

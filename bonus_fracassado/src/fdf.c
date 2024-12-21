@@ -46,10 +46,10 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Error parsing file.\n", 1));
 	ft_inits(&mlx, &size, &map);
 
-	mlx_image_t *menu;
-	menu = mlx_new_image(mlx, 250, size->win_h - 10);
-	ft_draw_solid_background(menu, 0x222222FF);
-	mlx_image_to_window(mlx, menu, 5, 5);
+	// mlx_image_t *menu;
+	// menu = mlx_new_image(mlx, 250, size->win_h - 10);
+	// ft_draw_solid_background(menu, 0x222222FF);
+	// mlx_image_to_window(mlx, menu, 5, 5);
 
 	ft_launch_iso_map(map->points, map, map->img, mlx);
 	ft_init_hooks1(&mlx, &map, &size);
