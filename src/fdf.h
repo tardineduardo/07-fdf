@@ -66,7 +66,8 @@ typedef struct s_map
 	double		min_x_scr;
 	double		min_y_scr;
 	double		height_scale;
-	char		*order;
+	double		zoom;
+	u_int32_t	bg_color;
 	t_point 	*points;
 	mlx_image_t *img;
 }	t_map;
@@ -131,6 +132,9 @@ void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
 void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);
 void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
 void	ft_draw_solid_background(mlx_image_t *img, int color);
+void	ft_redraw(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
+void	ft_redraw2(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
+
 
 //COLORS
 int		ft_get_rgba(int r, int ft_g, int b, int a);

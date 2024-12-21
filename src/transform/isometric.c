@@ -16,6 +16,6 @@ void	ft_convert_to_isometric(t_point *p, t_map *m, mlx_image_t *i)
 {
 	(void)i;
 	(void)m;
-	(*p).x_scr = ((*p).x_wld - (*p).y_wld) * cos(30 * PI / 180);
-	(*p).y_scr = ((*p).x_wld + (*p).y_wld) * sin(30 * PI / 180) - (*p).z_wld;
+	(*p).x_scr = ((*p).x_wld - (*p).y_wld) * cos(30 * PI / 180) * m->zoom;;
+	(*p).y_scr = (((*p).x_wld + (*p).y_wld) * sin(30 * PI / 180) - (*p).z_wld) * m->zoom;
 }

@@ -39,3 +39,4 @@ void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end)
 		line.i++;
 	}
 }
+

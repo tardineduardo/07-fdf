@@ -22,7 +22,7 @@ static void	ft_fill_point(char *pointstr, t_point *point)
 	if (charcolor)
 		point->rgba = (int)ft_atohx(charcolor);
 	else
-		point->rgba = 0xFFFFFFFF;
+		point->rgba = 0xF4DCD6FF;
 	point->r = ft_get_r(point->rgba);
 	point->g = ft_get_g(point->rgba);
 	point->b = ft_get_b(point->rgba);

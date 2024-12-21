@@ -12,21 +12,40 @@
 
 #include "../fdf.h"
 
-static double	ft_adjust_z(t_map *map, t_point *point, double s)
-{
-	int	map_dim;
 
-	map_dim = lowest(map->map_w, map->map_h);
-	if (map->maxz > map_dim)
-	{
-		if (map->maxz == map->minz)
-			return ((double)(*point).z_map * s);
-		map->height_scale = (double)map_dim / ((double)map->maxz - map->minz);
-		return ((double)((*point).z_map - map->minz) * map->height_scale * s);
-	}
-	else
-		return ((double)(*point).z_map * s);
-}
+
+//////// RESOLVER ISSO, DESMEMBRAR
+
+
+
+
+// double	ft_adjust_z(t_map *map, t_point *point, double s)
+// {
+// 	int	map_dim;
+// 	double	s;
+// 	double	scale_w;
+// 	double	scale_h;
+
+// 	if (map->map_w == 0 || map->map_h == 0)
+// 		return ;
+// 	scale_w = (double)img->width / map->map_w;
+// 	scale_h = (double)img->height / map->map_h;
+// 	if (scale_w < scale_h)
+// 		s = scale_w * 0.5;
+// 	else
+// 		s = scale_h * 0.5;
+
+// 	map_dim = lowest(map->map_w, map->map_h);
+// 	if (map->maxz > map_dim)
+// 	{
+// 		if (map->maxz == map->minz)
+// 			return (1);
+// 		else	
+// 			map->height_scale = (double)map_dim / ((double)map->maxz - map->minz);
+// 	}
+// 	else
+// 		return (1);
+// }
 
 void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img)
 {
@@ -44,5 +63,5 @@ void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img)
 		s = scale_h * 0.5;
 	(*point).x_wld = (double)(*point).x_map * s;
 	(*point).y_wld = (double)(*point).y_map * s;
-	(*point).z_wld = ft_adjust_z(map, point, s);
+	(*point).z_wld = (double)(*point).z_map * s * map->height_scale;
 }

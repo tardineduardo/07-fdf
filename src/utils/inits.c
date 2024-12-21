@@ -12,6 +12,11 @@
 
 #include "../fdf.h"
 
+
+
+
+
+
 static void ft_free_resources(mlx_t **mlx, t_sizes **size, t_map **map)
 {
 	if (*mlx || (*map)->img)
