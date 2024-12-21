@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:20:33 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/16 19:49:43 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:40:32 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_map
 	double		max_y_scr;
 	double		min_x_scr;
 	double		min_y_scr;
-	double		height_scale;
+	double		extrusion;
 	char		*order;
 	t_point 	*points;
 	mlx_image_t *img;
@@ -157,7 +157,7 @@ void	ft_y_rot_s(t_point *point, double radian);
 void	ft_z_rot_s(t_point *point, double radian);
 
 
-void	ft_translate(t_point *point, t_map *map, mlx_image_t *img);
+void	ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_convert_to_isometric(t_point *point, t_map *map, mlx_image_t *img);
 

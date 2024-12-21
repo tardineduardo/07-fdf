@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:20:33 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/16 14:04:53 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:49:06 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_point
 	double		z_wld;
 	int			x_scr;
 	int			y_scr;
+	int			x_scr_old;
+	int			y_scr_old;
 	int			r;
 	int			g;
 	int			b;
@@ -65,7 +67,7 @@ typedef struct s_map
 	double		max_y_scr;
 	double		min_x_scr;
 	double		min_y_scr;
-	double		height_scale;
+	double		extrusion;
 	double		zoom;
 	u_int32_t	bg_color;
 	t_point 	*points;
@@ -120,6 +122,8 @@ void	ft_min_max_z(t_map **map);
 void	ft_find_y_boundaries(t_point **point, t_map *map);
 void	ft_find_x_boundaries(t_point **point, t_map *map);
 
+
+
 //INITS
 void	ft_inits(mlx_t **mlx, t_sizes **size, t_map **map);
 void	ft_get_monitor_resolution(t_sizes *size);
@@ -132,7 +136,8 @@ void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
 void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);
 void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
 void	ft_draw_solid_background(mlx_image_t *img, int color);
-void	ft_redraw(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
+void	ft_zoom(t_map *m, mlx_t **mlx);
+void	ft_redraw(t_map *m, mlx_t **mlx);
 void	ft_redraw2(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
 
 
@@ -147,7 +152,7 @@ int		ft_get_a(int rgba);
 void	ft_x_rot(t_point *point, t_map *map, mlx_image_t *i);
 void	ft_y_rot(t_point *point, t_map *map, mlx_image_t *i);
 void	ft_z_rot(t_point *point, t_map *map, mlx_image_t *i);
-void	ft_translate(t_point *point, t_map *map, mlx_image_t *img);
+void	ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_convert_to_isometric(t_point *point, t_map *map, mlx_image_t *img);
 

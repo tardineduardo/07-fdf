@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:31:04 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 22:48:59 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:29:51 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static double	ft_adjust_z(t_map *map, t_point *point, double s)
 	{
 		if (map->maxz == map->minz)
 			return ((double)(*point).z_map * s);
-		map->height_scale = (double)map_dim / ((double)map->maxz - map->minz);
-		return ((double)((*point).z_map - map->minz) * map->height_scale * s);
+		map->extrusion = (double)map_dim / ((double)map->maxz - map->minz);
+		return ((double)((*point).z_map - map->minz) * map->extrusion * s);
 	}
 	else
 		return ((double)(*point).z_map * s);

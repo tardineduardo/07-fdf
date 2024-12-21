@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:31:04 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 22:48:59 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:29:51 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 // 		if (map->maxz == map->minz)
 // 			return (1);
 // 		else	
-// 			map->height_scale = (double)map_dim / ((double)map->maxz - map->minz);
+// 			map->extrusion = (double)map_dim / ((double)map->maxz - map->minz);
 // 	}
 // 	else
 // 		return (1);
@@ -63,5 +63,5 @@ void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img)
 		s = scale_h * 0.5;
 	(*point).x_wld = (double)(*point).x_map * s;
 	(*point).y_wld = (double)(*point).y_map * s;
-	(*point).z_wld = (double)(*point).z_map * s * map->height_scale;
+	(*point).z_wld = (double)(*point).z_map * s * map->extrusion;
 }
