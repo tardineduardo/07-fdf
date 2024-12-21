@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:20:33 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/21 14:49:06 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:16:09 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int		ft_set_win_and_img_sizes(t_sizes *size);
 
 //DRAW
 void	ft_update_points(t_point *p, mlx_image_t *img, t_map *map, t_ft func);
+void	ft_update_points_new(t_map *map, t_ft func);
+
 void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
 void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
 void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);

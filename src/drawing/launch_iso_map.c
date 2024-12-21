@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:53:05 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/21 14:40:32 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:17:24 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx)
 	m->rot_x = 0;
 	m->rot_y = 0;
 	m->bg_color = 0x222222FF;
-	m->extrusion	= 1;
+	m->extrusion = 1;
 	m->zoom	= 1;
-	ft_update_points(point, img, m, &ft_fit_to_image);
-	ft_update_points(point, img, m, &ft_z_rot);
-	ft_update_points(point, img, m, &ft_x_rot);
-	ft_update_points(point, img, m, &ft_y_rot);
+	ft_update_points_new(m, &ft_fit_to_image);
+	ft_update_points_new(m, &ft_z_rot);
+	ft_update_points_new(m, &ft_x_rot);
+	ft_update_points_new(m, &ft_y_rot);
 	ft_update_points(point, img, m, &ft_convert_to_isometric);
 	ft_find_x_boundaries(&point, m);
 	ft_find_y_boundaries(&point, m);

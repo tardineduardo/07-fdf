@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:33:37 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/16 13:59:25 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:14:36 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@ void	ft_update_points(t_point *p, mlx_image_t *img, t_map *map, t_ft func)
 		i++;
 	}
 }
+
+void	ft_update_points_new(t_map *map, t_ft func)
+{
+	int	i;
+	int	total_size;
+
+	i = 0;
+	total_size = map->map_w * map->map_h;
+	while (i < total_size)
+	{
+		func(&map->points[i], map, map->img);
+		i++;
+	}
+}
+
+
+
 
 void	ft_error(void)
 {
