@@ -8,22 +8,18 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	else if (ydelta < 0)
 		puts("Down!");
 	
-	// Can also detect a mousewheel that go along the X (e.g: MX Master 3)
-	if (xdelta < 0)
-		puts("Sliiiide to the left!");
-	else if (xdelta > 0)
-		puts("Sliiiide to the right!");
+
 }
 
-int32_t	main(void)
-{
-	mlx_t* mlx;
+// int32_t	main(void)
+// {
+// 	mlx_t* mlx;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-		return (EXIT_FAILURE);
+// 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+// 		return (EXIT_FAILURE);
 
-	mlx_scroll_hook(mlx, &my_scrollhook, NULL);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
+// 	mlx_scroll_hook(mlx, &my_scrollhook, NULL);
+// 	mlx_loop(mlx);
+// 	mlx_terminate(mlx);
+// 	return (EXIT_SUCCESS);
+// }

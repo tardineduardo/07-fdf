@@ -24,6 +24,7 @@ void	ft_init_hooks(mlx_t **mlx, t_map **map, t_sizes **sizes)
 	hooks->points = (*map)->points;
 
 	mlx_key_hook(hooks->mlx, &ft_key_hooks, hooks);
+ 	mlx_scroll_hook(hooks->mlx, &my_scrollhook, hooks);
 
 
 

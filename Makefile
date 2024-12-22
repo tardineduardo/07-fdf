@@ -8,7 +8,6 @@ MAIN =	src/fdf.c \
 		src/transform/fit.c \
 		src/transform/isometric.c \
 		src/debug/put_points.c \
-		src/transform/center_map_in_image.c \
 		src/transform/bounds.c \
 		src/drawing/draw_line.c \
 		src/drawing/draw_grid.c \
@@ -17,16 +16,17 @@ MAIN =	src/fdf.c \
 		src/drawing/draw_solid_background.c \
 		src/hooks/keys.c \
 		src/utils/min_max_z.c \
+		src/drawing/extrude.c \
 		src/drawing/zoom.c \
 		src/drawing/redraw.c \
-
-
+		src/hooks/mouse.c \
+		src/transform/center.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 
 NAME = fdf
 

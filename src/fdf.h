@@ -68,6 +68,7 @@ typedef struct s_map
 	double		min_x_scr;
 	double		min_y_scr;
 	double		extrusion;
+	int			center_type;
 	double		zoom;
 	u_int32_t	bg_color;
 	t_point 	*points;
@@ -121,8 +122,13 @@ typedef void	(*t_ft)(t_point*, t_map*, mlx_image_t*);
 void	ft_min_max_z(t_map **map);
 void	ft_find_y_boundaries(t_point **point, t_map *map);
 void	ft_find_x_boundaries(t_point **point, t_map *map);
+void ft_center(t_map *map);
+void ft_center_map_in_place(t_point *point, t_map *map, mlx_image_t *img);
+void ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
 
 
+
+void my_scrollhook(double xdelta, double ydelta, void* param);
 
 //INITS
 void	ft_inits(mlx_t **mlx, t_sizes **size, t_map **map);
@@ -138,7 +144,10 @@ void	ft_draw_line(mlx_image_t *img, t_point *start, t_point *end);
 void	draw_hlines(mlx_image_t *img, t_point *point, t_map *m);
 void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
 void	ft_draw_solid_background(mlx_image_t *img, int color);
-void	ft_zoom(t_map *m, mlx_t **mlx);
+void	ft_extrude(t_map *m, mlx_t **mlx, int key);
+void	ft_zoom(t_map *m, mlx_t **mlx, int key);
+
+
 void	ft_redraw(t_map *m, mlx_t **mlx);
 void	ft_redraw2(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
 
@@ -154,7 +163,7 @@ int		ft_get_a(int rgba);
 void	ft_x_rot(t_point *point, t_map *map, mlx_image_t *i);
 void	ft_y_rot(t_point *point, t_map *map, mlx_image_t *i);
 void	ft_z_rot(t_point *point, t_map *map, mlx_image_t *i);
-void	ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
+//void	ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img);
 void	ft_convert_to_isometric(t_point *point, t_map *map, mlx_image_t *img);
 

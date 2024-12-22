@@ -20,3 +20,6 @@ void	ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img)
 	(*point).x_scr += map->x_scr_var;
 	(*point).y_scr += map->y_scr_var;
 }
+
+
+

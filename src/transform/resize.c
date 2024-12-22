@@ -12,7 +12,7 @@
 
 #include "../fdf.h"
 
-void	ft_zoom(t_point *point, double increment)
+void	ft_extrude(t_point *point, double increment)
 {
 	point->x_scr = point->x_scr * increment;
 	point->y_scr = point->y_scr * increment;

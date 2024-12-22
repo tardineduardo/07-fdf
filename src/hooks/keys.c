@@ -28,29 +28,17 @@ void	ft_key_hooks(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(hook->mlx);
 
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_S) && keydata.action == MLX_PRESS)
 	{
-		hook->map->extrusion	+= 0.2;
-		ft_zoom(hook->map, &hook->mlx);
+		ft_extrude(hook->map, &hook->mlx, keydata.key);
 	}
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+	if ((keydata.key == MLX_KEY_Z || keydata.key == MLX_KEY_X) && keydata.action == MLX_PRESS)
 	{
-		hook->map->extrusion	-= 0.2;
-		ft_zoom(hook->map, &hook->mlx);
+		ft_zoom(hook->map, &hook->mlx, keydata.key);
 	}
 
 
 
-	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
-	{
-		hook->map->zoom += 0.25;
-		ft_redraw2(hook->map->points, hook->map, hook->map->img, &hook->mlx);
-	}
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-	{
-		hook->map->zoom -= 0.25;
-		ft_redraw2(hook->map->points, hook->map, hook->map->img, &hook->mlx);
-	}
 
 
 
