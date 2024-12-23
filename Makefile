@@ -14,13 +14,15 @@ MAIN =	src/fdf.c \
 		src/drawing/launch_iso_map.c \
 		src/utils/inits.c \
 		src/drawing/draw_solid_background.c \
-		src/hooks/keys.c \
+		src/hooks/hooks.c \
 		src/utils/min_max_z.c \
 		src/drawing/extrude.c \
 		src/drawing/zoom.c \
 		src/drawing/redraw.c \
-		src/hooks/mouse.c \
 		src/transform/center.c \
+		src/drawing/rotate_z.c \
+
+
 
 OBJS_SRC = $(MAIN:.c=.o) 
 

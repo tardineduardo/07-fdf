@@ -1,6 +1,6 @@
 #include "../src/fdf.h"
 
-void my_scrollhook(double xdelta, double ydelta, void* param)
+void ft_scroll_hooks(double xdelta, double ydelta, void* param)
 {
 	// Simple up or down detection.
 	if (ydelta > 0)
@@ -18,7 +18,7 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 // 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 // 		return (EXIT_FAILURE);
 
-// 	mlx_scroll_hook(mlx, &my_scrollhook, NULL);
+// 	mlx_scroll_hook(mlx, &ft_scroll_hooks, NULL);
 // 	mlx_loop(mlx);
 // 	mlx_terminate(mlx);
 // 	return (EXIT_SUCCESS);
