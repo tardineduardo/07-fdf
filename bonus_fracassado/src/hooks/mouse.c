@@ -1,6 +1,6 @@
 #include "../src/fdf.h"
 
-void my_scrollhook(double xdelta, double ydelta, void* param)
+void ft_scroll_hooks(double xdelta, double ydelta, void* param)
 {
 	// Simple up or down detection.
 	if (ydelta > 0)

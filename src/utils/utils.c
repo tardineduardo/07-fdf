@@ -41,8 +41,6 @@ void	ft_update_points_new(t_map *map, t_ft func)
 }
 
 
-
-
 void	ft_error(void)
 {
 	ft_dprintf(STDERR_FILENO, "%s", mlx_strerror(mlx_errno));

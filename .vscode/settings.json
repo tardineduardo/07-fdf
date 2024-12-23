@@ -1,12 +1,13 @@
 {
   "files.associations": {
-    "libft.h": "c",
-    "fdf.h": "c",
-    "mlx42.h": "c",
-    "mlx42_int.h": "c",
-    "xlib.h": "c",
-    "math.h": "c"
-  },
+	"libft.h": "c",
+	"fdf.h": "c",
+	"mlx42.h": "c",
+	"mlx42_int.h": "c",
+	"xlib.h": "c",
+	"math.h": "c",
+	"random": "c"
+},
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

@@ -69,6 +69,7 @@ typedef struct s_map
 	double		min_x_scr;
 	double		min_y_scr;
 	double		extrusion;
+	double 		translate_x;	
 	int			center_type;
 	double		zoom;
 	u_int32_t	bg_color;
@@ -88,17 +89,6 @@ typedef struct s_line
 	int		i;
 }	t_line;
 
-typedef struct s_camera
-{
-    double x;       // Camera position in world space
-    double y;
-    double z;
-    double rot_x;   // Camera orientation (pitch)
-    double rot_y;   // Camera orientation (yaw)
-    double rot_z;   // Camera orientation (roll)
-    double fov;     // Field of view for perspective projection
-} t_camera;
-
 typedef struct s_file
 {
 	int		lines;
@@ -114,6 +104,8 @@ typedef struct s_hook_param
 	t_sizes		*sizes;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	int			last_x;
+	bool		shift_pressed;
 }	t_hook_param;
 
 
@@ -132,8 +124,9 @@ void ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
 uint32_t ft_interpolate(u_int32_t start_color, u_int32_t end_color, int total_steps, int curr_step);
 
 
+void	ft_init_hooks(mlx_t **mlx, t_map **map, t_sizes **sizes);
 
-void my_scrollhook(double xdelta, double ydelta, void* param);
+void ft_scroll_hooks(double xdelta, double ydelta, void* param);
 
 //INITS
 void	ft_inits(mlx_t **mlx, t_sizes **size, t_map **map);
@@ -151,10 +144,12 @@ void	draw_vlines(mlx_image_t *img, t_point *point, t_map *m);
 void	ft_draw_solid_background(mlx_image_t *img, int color);
 void	ft_extrude(t_map *m, mlx_t **mlx, int key);
 void	ft_zoom(t_map *m, mlx_t **mlx, int key);
+void mouse_press_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
 
 
 void	ft_redraw(t_map *m, mlx_t **mlx);
 void	ft_redraw2(t_point *point, t_map *m, mlx_image_t *img, mlx_t **mlx);
+void	ft_rotate_z(t_map *m, mlx_t **mlx, int key);
 
 
 //COLORS
