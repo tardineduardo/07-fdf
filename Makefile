@@ -21,6 +21,7 @@ MAIN =	src/fdf.c \
 		src/drawing/redraw.c \
 		src/hooks/mouse.c \
 		src/transform/center.c \
+		src/colors/interpolate.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 

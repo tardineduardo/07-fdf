@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:37:24 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/15 16:36:34 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/22 20:14:55 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ static void	ft_fill_point(char *pointstr, t_point *point)
 	if (charcolor)
 		point->rgba = (int)ft_atohx(charcolor);
 	else
-		point->rgba = 0xF4DCD6FF;
-	point->r = ft_get_r(point->rgba);
-	point->g = ft_get_g(point->rgba);
-	point->b = ft_get_b(point->rgba);
-	point->a = ft_get_a(point->rgba);
+		point->rgba = 0xFFFFFFFF;
 }
 
 static void	ft_fill_array(char *content, t_point *point, t_file *fdf)

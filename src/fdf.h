@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:20:33 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/21 15:16:09 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/22 21:51:03 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <math.h>
+# include <pthread.h>
 # include "../libs/libft/libft.h"
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # define PCT_OF_SCREEN 75
@@ -115,6 +116,16 @@ typedef struct s_hook_param
 	mlx_image_t	*img;
 }	t_hook_param;
 
+typedef struct s_rgba_color
+{
+	u_int32_t	rgba;
+	int			r;
+	int			g;
+	int			b;
+	int			a;
+}	t_rgba_color;
+
+
 typedef void	(*t_ft)(t_point*, t_map*, mlx_image_t*);
 
 //USING ------------------------------------------------------------------------
@@ -125,6 +136,7 @@ void	ft_find_x_boundaries(t_point **point, t_map *map);
 void ft_center(t_map *map);
 void ft_center_map_in_place(t_point *point, t_map *map, mlx_image_t *img);
 void ft_center_map_in_image(t_point *point, t_map *map, mlx_image_t *img);
+uint32_t ft_interpolate(u_int32_t start_color, u_int32_t end_color, int total_steps, int curr_step);
 
 
 

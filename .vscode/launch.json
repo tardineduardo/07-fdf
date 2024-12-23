@@ -7,7 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/fdf",
       "args": [
-        "/home/eduardo/Documentos/repos/07-fdf/maps/42.fdf"
+        "/nfs/homes/eduribei/Documentos/repos/07-fdf/maps/t2.fdf"
       ],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
