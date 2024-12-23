@@ -116,14 +116,7 @@ typedef struct s_hook_param
 	mlx_image_t	*img;
 }	t_hook_param;
 
-typedef struct s_rgba_color
-{
-	u_int32_t	rgba;
-	int			r;
-	int			g;
-	int			b;
-	int			a;
-}	t_rgba_color;
+
 
 
 typedef void	(*t_ft)(t_point*, t_map*, mlx_image_t*);

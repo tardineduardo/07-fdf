@@ -65,6 +65,15 @@ typedef struct s_dlist
 
 typedef long long	t_llong;
 
+typedef struct s_rgba_color
+{
+	u_int32_t	rgba;
+	int			r;
+	int			g;
+	int			b;
+	int			a;
+}	t_rgba_color;
+
 // conversions + comparisons
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
