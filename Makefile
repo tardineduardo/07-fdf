@@ -7,22 +7,36 @@ MAIN =	src/fdf.c \
 		src/transform/point.c \
 		src/transform/fit.c \
 		src/transform/isometric.c \
-		src/debug/put_points.c \
-		src/transform/translate.c \
 		src/transform/bounds.c \
 		src/drawing/draw_line.c \
 		src/drawing/draw_grid.c \
 		src/drawing/launch_iso_map.c \
 		src/utils/inits.c \
 		src/drawing/draw_solid_background.c \
-		src/hooks/keys.c \
+		src/hooks/hooks.c \
 		src/utils/min_max_z.c \
+		src/drawing/extrude.c \
+		src/drawing/zoom.c \
+		src/drawing/redraw.c \
+		src/transform/center.c \
+		src/colors/interpolate.c \
+		src/colors/gradient.c \
+		src/drawing/rotate_z.c \
+		src/drawing/rotate_x.c \
+		src/drawing/rotate_y.c \
+		src/drawing/translate_key.c \
+		src/colors/color_hooks.c \
+		src/drawing/launch_dim_map.c \
+		src/transform/dimetric.c \
+		src/drawing/change_view.c \
+		src/transform/top.c \
+		src/drawing/launch_top_map.c \
 
 OBJS_SRC = $(MAIN:.c=.o) 
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = fdf
 

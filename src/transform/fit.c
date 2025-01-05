@@ -6,27 +6,11 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 19:31:04 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 22:48:59 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/23 20:11:48 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-static double	ft_adjust_z(t_map *map, t_point *point, double s)
-{
-	int	map_dim;
-
-	map_dim = lowest(map->map_w, map->map_h);
-	if (map->maxz > map_dim)
-	{
-		if (map->maxz == map->minz)
-			return ((double)(*point).z_map * s);
-		map->height_scale = (double)map_dim / ((double)map->maxz - map->minz);
-		return ((double)((*point).z_map - map->minz) * map->height_scale * s);
-	}
-	else
-		return ((double)(*point).z_map * s);
-}
 
 void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img)
 {
@@ -39,10 +23,10 @@ void	ft_fit_to_image(t_point *point, t_map *map, mlx_image_t *img)
 	scale_w = (double)img->width / map->map_w;
 	scale_h = (double)img->height / map->map_h;
 	if (scale_w < scale_h)
-		s = scale_w * 0.5;
+		s = scale_w * map->zoom;
 	else
-		s = scale_h * 0.5;
+		s = scale_h * map->zoom;
 	(*point).x_wld = (double)(*point).x_map * s;
 	(*point).y_wld = (double)(*point).y_map * s;
-	(*point).z_wld = ft_adjust_z(map, point, s);
+	(*point).z_wld = (double)(*point).z_map * s * map->extrusion;
 }

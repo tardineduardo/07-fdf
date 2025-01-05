@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize.c                                           :+:      :+:    :+:   */
+/*   top.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 20:04:54 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/09 01:31:15 by eduribei         ###   ########.fr       */
+/*   Created: 2024/12/08 19:29:50 by eduribei          #+#    #+#             */
+/*   Updated: 2024/12/28 20:26:11 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	ft_extrude(t_point *point, double increment)
+void	ft_convert_to_top(t_point *p, t_map *m, mlx_image_t *i)
 {
-	point->x_scr = point->x_scr * increment;
-	point->y_scr = point->y_scr * increment;
+	(void)i;
+	(void)m;
+	(*p).x_scr = ((*p).x_wld - (*p).y_wld)
+		* cos(0 * PI / 180);
+	(*p).y_scr = ((*p).x_wld + (*p).y_wld)
+		* sin(90 * PI / 180) - (*p).z_wld;
 }

@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:37:24 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/15 16:36:34 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/23 20:16:45 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@ static void	ft_fill_point(char *pointstr, t_point *point)
 	point->z_map = ft_atoi(ft_strtok_r(pointstr, ",", &save_data));
 	charcolor = ft_strtok_r(NULL, ",", &save_data);
 	if (charcolor)
-		point->rgba = (int)ft_atohx(charcolor);
+		point->rgba_original = (int)ft_atohx(charcolor);
 	else
-		point->rgba = 0xFFFFFFFF;
-	point->r = ft_get_r(point->rgba);
-	point->g = ft_get_g(point->rgba);
-	point->b = ft_get_b(point->rgba);
-	point->a = ft_get_a(point->rgba);
+		point->rgba_original = 0xFFFFFFFF;
 }
 
 static void	ft_fill_array(char *content, t_point *point, t_file *fdf)
@@ -67,7 +63,6 @@ static void	ft_count_trimm_and_validate(char *str, t_file *fdf)
 
 	ft_init_count(str, fdf, &col_check);
 	copy = ft_strdup(str);
-	// error_ckeck
 	line = ft_strtok_r(copy, "\n", &fdf->save_line);
 	while (line != NULL)
 	{

@@ -1,0 +1,17 @@
+
+
++----------------+-----------------------+
+| CONTROL        | ACTION                |
++----------------+-----------------------+
+| Rotate X       | ↑  ↓                  |
+| Rotate Y       | PgDn / PgUp           |
+| Rotate Z       | ←  →                  |
+| Extrusion      | 1 - 2                 |
+| Zoom           | Mouse Scroll          |
+| Colors         | F1 - F4               |
+| Reset Color    | F5                    |
+| Isometric View | I                     |
+| Dimetric View  | D                     |
+| Top View       | T                     |
+| Quit           | ESC                   |
++----------------+-----------------------+

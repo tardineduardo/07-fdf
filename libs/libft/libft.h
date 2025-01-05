@@ -6,7 +6,7 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:02:36 by eduribei          #+#    #+#             */
-/*   Updated: 2024/11/28 20:32:36 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/28 20:51:27 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ typedef struct s_dlist
 }				t_dll;
 
 typedef long long	t_llong;
+
+typedef struct s_rgba_color
+{
+	u_int32_t	rgba;
+	int			r;
+	int			g;
+	int			b;
+	int			a;
+}	t_rgba_color;
 
 // conversions + comparisons
 int		ft_atoi(const char *nptr);
@@ -140,6 +149,7 @@ size_t	ft_count_char(char *s, char c);
 char	*ft_strtok(char *string, char *set);
 char	*ft_strtok_r(char *input_str, char *delimiters, char **saveptr);
 char	*ft_fn_to_str(char *filename);
+void	ft_cat(const char *filename);
 
 // printing
 int		ft_putchar_fd(char c, int fd);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch_iso_map.c                                   :+:      :+:    :+:   */
+/*   launch_dim_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:53:05 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/23 20:54:19 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/23 20:55:04 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img,
+void	ft_launch_dim_map(t_point *point, t_map *m, mlx_image_t *img,
 	mlx_t **mlx)
 {
 	m->rot_z = 270;
@@ -20,8 +20,7 @@ void	ft_launch_iso_map(t_point *point, t_map *m, mlx_image_t *img,
 	m->rot_y = 0;
 	m->extrusion = 1;
 	m->zoom = 0.5;
-	m->proj = &ft_convert_to_isometric;
-	ft_set_color_pallet_1(m);
+	m->proj = ft_convert_to_dimetric;
 	ft_apply_gradient_colors(m);
 	ft_update_points_new(m, &ft_fit_to_image);
 	ft_update_points_new(m, &ft_z_rot);

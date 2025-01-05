@@ -6,13 +6,13 @@
 /*   By: eduribei <eduribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 21:55:09 by eduribei          #+#    #+#             */
-/*   Updated: 2024/12/10 00:33:12 by eduribei         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:33:11 by eduribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	draw_vlines(mlx_image_t *img, t_point *p, t_map *m)
+void	ft_draw_vlines(mlx_image_t *img, t_point *p, t_map *m)
 {
 	int		line;
 	int		col;
@@ -34,7 +34,7 @@ void	draw_vlines(mlx_image_t *img, t_point *p, t_map *m)
 	}
 }
 
-void	draw_hlines(mlx_image_t *img, t_point *p, t_map *m)
+void	ft_draw_hlines(mlx_image_t *img, t_point *p, t_map *m)
 {
 	int		line;
 	int		col;
